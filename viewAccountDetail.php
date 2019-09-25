@@ -55,12 +55,12 @@ include_once 'includes/maincontenthome.php';
 								?>
 								<tr>
 								  <td><?=$value['StudentId']?></td>
-								  <td>Mac OS 8-9</td>
+								  <td>Student name</td>
 								  <td><?=$value['payable_amount']?></td>
 								  <td><?=$value['paid_amount']?></td>
 								  <td><?=$value['due']?></td>
 								  <td><?=$value['fine']?></td>
-								</tr>
+								n</tr>
 								<?php
 								}
 								?>

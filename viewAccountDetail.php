@@ -31,50 +31,46 @@ include_once 'includes/maincontenthome.php';
 								<tr>
 								  <th>Student ID</th>
 								  <th>Student Name</th>
-								  <th>Payable Amount</th>
+								  <th>Paybale Amount</th>
 								  <th>Paid Amount</th>
-								  <th>Due</th>
+								  <th>Due Amount</th>
 								  <th>Fine</th>
+								  <th>Edit</th>
 								</tr>
 							</thead>
 							<tbody>		
-								<?php							
-
+								<?php
 								include_once("dbCon.php");
-
 								$conn =connect();
-
-								$sql= "SELECT * FROM accounts_detail";
-								//echo $sql;
-								
-								$result=$conn->query($sql);
-								//print_r($result);
-								
+								$sql="SELECT * FROM accounts_detail";
+								$result= $conn->query($sql);
 								foreach($result as $value){
+								 
+								
 								
 								?>
 								<tr>
 								  <td><?=$value['StudentId']?></td>
-								  <td>Student name</td>
+								  <td>Internet Explore</td>
 								  <td><?=$value['payable_amount']?></td>
 								  <td><?=$value['paid_amount']?></td>
-								  <td><?=$value['due']?></td>
+								  <td><?php $a = ($value ['payable_amount'] - $value['paid_amount']); echo $a;?></td>
 								  <td><?=$value['fine']?></td>
-								n</tr>
-								<?php
-								}
-								?>
+								  <td><a href="addAccountDetail.php?id=<?=$value['id']?>"><button>Edit</button></td>
+								</tr>
+							<?php } ?>
 								
 
 							</tbody>
 							<tfoot>
 								<tr>
-								 <th>Student ID</th>
+								  <th>Student ID</th>
 								  <th>Student Name</th>
-								  <th>Payable Amount</th>
+								  <th>Paybale Amount</th>
 								  <th>Paid Amount</th>
-								  <th>Due</th>
+								  <th>Due Amount</th>
 								  <th>Fine</th>
+								  <th>Edit</th>
 								</tr>
 							</tfoot>
 						</table>
@@ -93,11 +89,11 @@ include_once 'includes/footer.php';
     $('#example1').DataTable()
     $('#example2').DataTable({
       'paging'      : true,
-      'lengthChange': false,
+      'lengthChange': true,
       'searching'   : false,
       'ordering'    : true,
       'info'        : true,
-      'autoWidth'   : false
+      'autoWidth'   : true
     })
   })
 </script>

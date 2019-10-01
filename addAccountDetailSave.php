@@ -45,31 +45,31 @@ if($_SESSION['a_student_id']<0 ){
 
 
 //--->Numeric value validation start
-if($_SESSION['a_fine']!==is_numeric ){
+if(!is_numeric($_SESSION['a_fine'])){
 	$valid=false;
 	$_SESSION['amsg']='Please input only numeric value for fine';
 	
 }
 
-if($_SESSION['a_due']!==is_numeric ){
+if(!is_numeric($_SESSION['a_due'])){
 	$valid=false;
 	$_SESSION['amsg']='Please input only numeric value for due';
 	
 }
 
-if($_SESSION['a_paidamount']!==is_numeric ){
+if(!is_numeric($_SESSION['a_paidamount'])){
 	$valid=false;
 	$_SESSION['amsg']='Please input only numeric value for paid amount';
 	
 }
 
-if($_SESSION['a_payable_amount']!==is_numeric ){
+if(!is_numeric($_SESSION['a_payable_amount'])){
 	$valid=false;
 	$_SESSION['amsg']='Please input only numeric value for payable amount';
 	
 }
 
-if($_SESSION['a_student_id']!==is_numeric ){
+if(!is_numeric($_SESSION['a_student_id'])){
 	$valid=false;
 	$_SESSION['amsg']='Please input only numeric value for student id';
 	

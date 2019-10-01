@@ -15,7 +15,7 @@ if(isset($_POST["course_submit"])){
 	$EntryYear = $_POST['EnYear'];
 	
 
-	$sql="INSERT INTO student_course(StudentId,	batch, 	course_name, 	year ) VALUES('$Student_Id', '$batche_No','$Course_Name', '$EntryYear')";
+	$sql="INSERT INTO student_course(StudentId,	batch, 	course_name, year ) VALUES('$Student_Id', '$batche_No','$Course_Name', '$EntryYear')";
 		
 	echo $sql;
 	if($conn->query($sql)){

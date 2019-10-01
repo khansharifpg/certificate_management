@@ -35,6 +35,7 @@ include_once 'includes/maincontenthome.php';
 								  <th>Paid Amount</th>
 								  <th>Due</th>
 								  <th>Fine</th>
+								  <th>Action</th>
 								</tr>
 							</thead>
 							<tbody>		
@@ -60,12 +61,12 @@ include_once 'includes/maincontenthome.php';
 								  <td><?=$value['paid_amount']?></td>
 								  <td><?=$value['due']?></td>
 								  <td><?=$value['fine']?></td>
-								n</tr>
+								  <td><a href="addAccountDetail.php?id=<?=$value['id']?>"><button>Edit</button></td>
+								</tr>
 								<?php
 								}
 								?>
 								
-
 							</tbody>
 							<tfoot>
 								<tr>

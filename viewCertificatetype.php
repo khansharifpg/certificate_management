@@ -5,7 +5,7 @@ include_once 'includes/sidenavbar.php';
 include_once 'includes/maincontenthome.php';
 ?>  
 
-<section class="content-header">
+	<section class="content-header">
       <h1>      
          <a class="btn btn-primary"  href="addCertificatetype.php" role="button" style="background-color:green" > <i class="fa fa-plus" aria-hidden="true"></i> Add Certificate Name </a>
       </h1>
@@ -16,7 +16,7 @@ include_once 'includes/maincontenthome.php';
       </ol>
     </section>
 <!-- Main content -->
-      <section class="content">
+    <section class="content">
 		<div class="row">
 			<div class="col-xs-12">
 				  
@@ -29,38 +29,54 @@ include_once 'includes/maincontenthome.php';
 						<table id="example1" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-								  <th>Rendering engine</th>
-								  <th>Browser</th>
-								  <th>Platform(s)</th>
-								  <th>Engine version</th>
-								  <th>CSS grade</th>
+								  <th>Local ID</th>
+								  <th>NCC ID</th>
+								  <th>Student Name</th>
+								  <th>Certificate Name</th> 
+								  <th>Batch</th>
+								  <th>Year</th> 
+								  <th>Action</th> 
+								  
 								</tr>
 							</thead>
-							<tbody>		
+							<tbody>	
+								<?php 
+								include_once("dbCon.php");
+
+								$conn =connect();
 								
-								<tr>
-								  <td>Tasman</td>
+								$sql= "SELECT * FROM certificate_nametype";
+								//echo $sql;
+								
+								$result=$conn->query($sql);
+								//print_r($result);
+								
+								foreach($result as $value){
+								
+								?>
+								
+								<tr> 
 								  <td>Internet Explorer 4.5</td>
 								  <td>Mac OS 8-9</td>
 								  <td>-</td>
+								  <td><?=$value['Certifiate_name']?></td>
 								  <td>X</td>
+								  <td>X</td>
+								  <td><a href="addCertificatetype.php?id=<?=$value['id']?>"><button>Edit</button></td>
 								</tr>
-								<tr>
-								  <td>Tasman</td>
-								  <td>Internet Explorer 5.1</td>
-								  <td>Mac OS 7.6-9</td>
-								  <td>1</td>
-								  <td>C</td>
-								</tr>
-
+								<?php
+								}
+								?>
 							</tbody>
 							<tfoot>
 								<tr>
-								  <th>Rendering engine</th>
-								  <th>Browser</th>
-								  <th>Platform(s)</th>
-								  <th>Engine version</th>
-								  <th>CSS grade</th>
+								  <th>Local ID</th>
+								  <th>NCC ID</th>
+								  <th>Student Name</th>
+								  <th>Certificate Name</th> 
+								  <th>Batch</th>
+								  <th>Year</th>
+								  <th>Action</th>
 								</tr>
 							</tfoot>
 						</table>

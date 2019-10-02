@@ -26,41 +26,54 @@ include_once 'includes/maincontenthome.php';
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
-						<table id="example1" class="table table-bordered table-striped">
+								<table id="example1" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-								  <th>Rendering engine</th>
-								  <th>Browser</th>
-								  <th>Platform(s)</th>
-								  <th>Engine version</th>
-								  <th>CSS grade</th>
+								  <th>Local ID</th>
+								  <th>NCC ID</th>
+								  <th>Student Name</th>
+								  <th>Date Of Birth</th>
+								  <th>Email</th>
+								  <th>Phone Number</th>
+								  <th>Library Clearance</th>
+								  <th>Edit</th>
 								</tr>
 							</thead>
 							<tbody>		
+								<?php
+								include_once("dbCon.php");
+								$conn =connect();
+								$sql="SELECT * FROM students_info";
+								$result= $conn->query($sql);
+								foreach($result as $value){
+								 
 								
+								
+								?>
 								<tr>
-								  <td>Tasman</td>
-								  <td>Internet Explorer 4.5</td>
-								  <td>Mac OS 8-9</td>
-								  <td>-</td>
-								  <td>X</td>
+								  <td><?=$value['local_id']?></td>
+								  <td><?=$value['ncc_id']?></td>
+								  <td><?=$value['full_name']?></td>
+								  <td><?=$value['dob']?></td>
+								  <td><?=$value['email']?></td>
+								  <td><?=$value['phone']?></td>
+								  <td><?=$value['library_clearance']?></td>
+								  <td><a href="addStudentInfo.php?id=<?=$value['id']?>"><button>Edit</button></td>
 								</tr>
-								<tr>
-								  <td>Tasman</td>
-								  <td>Internet Explorer 5.1</td>
-								  <td>Mac OS 7.6-9</td>
-								  <td>1</td>
-								  <td>C</td>
-								</tr>
+							<?php } ?>
+								
 
 							</tbody>
 							<tfoot>
 								<tr>
-								  <th>Rendering engine</th>
-								  <th>Browser</th>
-								  <th>Platform(s)</th>
-								  <th>Engine version</th>
-								  <th>CSS grade</th>
+								  <th>Local ID</th>
+								  <th>NCC ID</th>
+								  <th>Student Name</th>
+								  <th>Date Of Birth</th>
+								  <th>Email</th>
+								  <th>Phone Number</th>
+								  <th>Library Clearance</th>
+								  <th>Edit</th>
 								</tr>
 							</tfoot>
 						</table>

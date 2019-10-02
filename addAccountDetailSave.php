@@ -1,6 +1,6 @@
 <?php 
-session_start();
 
+session_start();
 include_once("dbCon.php");
 
 
@@ -8,42 +8,13 @@ $conn =connect();
 
 $valid=true; 
 
-$_SESSION['a_student_id']=$_POST["studentid"];
-$_SESSION['a_payable_amount']=$_POST["payableamount"];
+$_SESSION['a_studentid']=$_POST["studentid"];
+$_SESSION['a_payableamount']=$_POST["payableamount"];
 $_SESSION['a_paidamount']=$_POST["paidamount"];
-$_SESSION['a_due']=$_POST["due"];
+
 $_SESSION['a_fine']=$_POST["fine"];
 
-//-->Negative value validation start
-if($_SESSION['a_fine']<0 ){
-	$valid=false;
-	$_SESSION['amsg']='Please input only positive value for fine';
-	unset($_SESSION['a_fine']);
-}
-if($_SESSION['a_due']<0 ){
-	$valid=false;
-	$_SESSION['amsg']='Please input only positive value for due';
-	unset($_SESSION['a_due']);
-}
-
-if($_SESSION['a_paidamount']<0 ){
-	$valid=false;
-	$_SESSION['amsg']='Please input only positive value for Paid amount';
-	unset($_SESSION['a_paidamount']);
-}
-if($_SESSION['a_payable_amount']<0 ){
-	$valid=false;
-	$_SESSION['amsg']='Please input only positive value payable amount';
-	unset($_SESSION['a_payable_amount']);
-}
-if($_SESSION['a_student_id']<0 ){
-	$valid=false;
-	$_SESSION['amsg']='Please input only positive value for Student Id';
-	unset($_SESSION['a_student_id']);
-}
-//Negative value validation done-->
-
-
+<<<<<<< HEAD
 //--->Numeric value validation start
 if(!is_numeric($_SESSION['a_fine'])){
 	$valid=false;
@@ -58,68 +29,48 @@ if(!is_numeric($_SESSION['a_due'])){
 }
 
 if(!is_numeric($_SESSION['a_paidamount'])){
+=======
+
+//Insert sql
+if($_POST["paidamount"]==null){
+  $valid=false;
+  $_SESSION['amsg']='Input Your Paid Amount';
+}
+
+if($_POST["payableamount"]==null){
+>>>>>>> develop
 	$valid=false;
-	$_SESSION['amsg']='Please input only numeric value for paid amount';
+	$_SESSION['amsg']='Input Your Amount';
 	
 }
 
+<<<<<<< HEAD
 if(!is_numeric($_SESSION['a_payable_amount'])){
+=======
+if($_POST["studentid"]==null){
+>>>>>>> develop
 	$valid=false;
-	$_SESSION['amsg']='Please input only numeric value for payable amount';
+	$_SESSION['amsg'] ='Input your id';
 	
-}
+}	
 
+<<<<<<< HEAD
 if(!is_numeric($_SESSION['a_student_id'])){
 	$valid=false;
 	$_SESSION['amsg']='Please input only numeric value for student id';
-	
-}
-//Numeric value validation done-->
-
-
-//--->Null value validation start
-if($_SESSION['a_fine']==null){
-	$valid=false;
-	$_SESSION['amsg']='Fine field is blank';
-	
-}
-
-if($_SESSION['a_due']==null){
-	$valid=false;
-	$_SESSION['amsg']='Due field is blank';
-	
-}
-	
-if($_SESSION['a_paidamount']==null){
-	$valid=false;
-	$_SESSION['amsg']='Paidamount is blank';
-	
-}
-
-if($_SESSION['a_payable_amount']==null){
-	$valid=false;
-	$_SESSION['amsg']='Payable amount field is blank';
-
-}	
-
-if($_SESSION['a_student_id']==null){
-	$valid=false;
-	$_SESSION['amsg']='Student Id field is blank';
-
-}
-//Null value validation done-->//
-
+=======
 function refresh(){
-	unset($_SESSION['a_student_id']);
-	unset($_SESSION['a_payable_amount']);
+	unset($_SESSION['a_studentid']);
+	unset($_SESSION['a_payableamount']);
 	unset($_SESSION['a_paidamount']);
-	unset($_SESSION['a_due']);
+>>>>>>> develop
+	
 	unset($_SESSION['a_fine']);
-	unset($_SESSION['amsg']);
 }
 
 
-if(isset($_POST["acount_submit"]) && ($valid==true)){
+
+if((isset($_POST["acount_submit"]))&& ($valid==true)){
 	
 	$student_id =$_POST['studentid'];
 	
@@ -127,25 +78,60 @@ if(isset($_POST["acount_submit"]) && ($valid==true)){
 
 	$paid_amount = $_POST['paidamount'];
 
-	$due_a = $_POST['due'];
+	
+
 
 	$fine_a = $_POST['fine'];
 	
 	$sql="INSERT INTO accounts_detail(StudentId, payable_amount, paid_amount, due, fine ) VALUES('$student_id', '$payable_amount', '$paid_amount', '$due_a', '$fine_a')";
 	
-	echo $sql;
+	//echo $sql;
 	if($conn->query($sql)){
-	echo "Added successfully";
+	refresh();
+	$_SESSION['amsg']='Added successfully';
+	header('Location:viewAccountDetail.php');
 	}
 	else {
-	 echo "not succesfull";
+	$_SESSION['amsg']="not succesfull";
+	header('Location:viewAccountDetail.php');
 	}
 }elseif($valid==false){
-	header("Location:addAccountDetail.php");
+	header('Location:addAccountDetail.php');
 }
-if(isset($_POST['acount_reset'])){
+
+
+//Edit sql
+if((isset($_POST["acount_edit"]))&& ($valid==true)){
+	
+	$id=$_POST['id'];
+	
+	$student_id =$_POST['studentid'];
+	
+	$payable_amount = $_POST['payableamount'];
+
+	$paid_amount = $_POST['paidamount'];
+
+	
+
+	$fine_a = $_POST['fine'];
+	
+	$sql="UPDATE accounts_detail SET StudentId='$student_id', payable_amount='$payable_amount', paid_amount='$paid_amount', fine='$fine_a' WHERE id='$id'";
+	//echo $sql;
+	//exit();
+	
+	//echo $sql;
+	if($conn->query($sql)){
 	refresh();
-	header("Location:addAccountDetail.php");
+	$_SESSION['amsg']='Added successfully';
+	header('Location:viewAccountDetail.php');
+	}
+	else {
+	$_SESSION['amsg']="not succesfull";
+	header('Location:viewAccountDetail.php');
+	}
+}elseif($valid==false){
+	header('Location:addAccountDetail.php');
 }
+
 
 ?>

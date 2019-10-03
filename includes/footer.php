@@ -52,3 +52,4 @@ reserved.
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 
+<script src="bower_components/select2/dist/js/select2.full.min.js"></script>

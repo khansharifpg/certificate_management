@@ -47,10 +47,6 @@
 				<span class="glyphicon glyphicon-user form-control-feedback"></span>
 			  </div>
 			  <div class="form-group has-feedback">
-				<input type="text" class="form-control" name="username" placeholder="User name" value="<?php if(isset($_SESSION['r_username'])){echo $_SESSION['r_username'];} ?>">
-				<span class="glyphicon glyphicon-user form-control-feedback"></span>
-			  </div>
-			  <div class="form-group has-feedback">
 				<input type="email" class="form-control" name="email" placeholder="Email" value="<?php if(isset($_SESSION['r_email'])){echo $_SESSION['r_email'];} ?>">
 				<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 			  </div>
@@ -65,8 +61,7 @@
 			  <div class="row">
 				<div class="box-footer">	 
 					<button type="submit" class="btn btn-info pull-right" style="background-color:green" name="register" >Register</button>
-					<button type="submit" class="btn btn-default pull-right" style="margin-right: 14px" name="reset" >Reset</button>
-				</div>
+					</div>
 				<!-- /.col -->
 			  </div>
 			</form>

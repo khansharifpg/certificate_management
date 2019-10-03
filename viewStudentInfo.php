@@ -57,8 +57,12 @@ include_once 'includes/maincontenthome.php';
 								  <td><?=$value['dob']?></td>
 								  <td><?=$value['email']?></td>
 								  <td><?=$value['phone']?></td>
-								  <td><?=$value['library_clearance']?></td>
-								  <td><a href="addStudentInfo.php?id=<?=$value['id']?>"><button>Edit</button></td>
+								  <td><?php if ($value['library_clearance']==0){
+									  echo "YES";
+								  }else{
+									  echo "No";
+								  }?></td> 
+								  <td><a type="button" class="btn btn-primary" href="addStudentInfo.php?id=<?=$value['id']?>">Edit</td>
 								</tr>
 							<?php } ?>
 								

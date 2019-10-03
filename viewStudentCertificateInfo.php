@@ -29,11 +29,15 @@ include_once 'includes/maincontenthome.php';
 						<table id="example1" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-								  <th>Rendering engine</th>
-								  <th>Browser</th>
-								  <th>Platform(s)</th>
-								  <th>Engine version</th>
-								  <th>CSS grade</th>
+								  <th>Local ID</th>
+								  <th>NCC ID</th>
+								  <th>Student Name</th>
+								
+								  <th>Batch No</th>
+								  <th>Session</th>
+								  <th>Delivery Status </th>
+								  <th>Remarks</th>
+								  <th>Edit</th>
 								</tr>
 							</thead>
 							<tbody>		
@@ -42,25 +46,24 @@ include_once 'includes/maincontenthome.php';
 								  <td>Tasman</td>
 								  <td>Internet Explorer 4.5</td>
 								  <td>Mac OS 8-9</td>
-								  <td>-</td>
 								  <td>X</td>
+								  <td>X</td>
+								
+								  <td>X</td>
+								  <td>X</td>
+								   <td><a type="button" class="btn btn-primary" href="addsStudentCertificateInfo.php?id=<?=$value['id']?>">Edit</td>
 								</tr>
-								<tr>
-								  <td>Tasman</td>
-								  <td>Internet Explorer 5.1</td>
-								  <td>Mac OS 7.6-9</td>
-								  <td>1</td>
-								  <td>C</td>
-								</tr>
-
 							</tbody>
 							<tfoot>
 								<tr>
-								  <th>Rendering engine</th>
-								  <th>Browser</th>
-								  <th>Platform(s)</th>
-								  <th>Engine version</th>
-								  <th>CSS grade</th>
+								  <th>Local ID</th>
+								  <th>NCC ID</th>
+								  <th>Student Name</th> 
+								  <th>Batch No</th>
+								  <th>Session</th>
+								  <th>Delivery Status</th>
+								  <th>Remarks</th>
+								  <th>Edit</th>
 								</tr>
 							</tfoot>
 						</table>

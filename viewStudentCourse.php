@@ -29,11 +29,15 @@ include_once 'includes/maincontenthome.php';
 						<table id="example1" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-								  <th>Rendering engine</th>
-								  <th>Browser</th>
-								  <th>Platform(s)</th>
-								  <th>Engine version</th>
-								  <th>CSS grade</th>
+								  <th>Local ID</th>
+								  <th>NCC ID</th>
+								  <th>Student Name</th>
+								  <th>Course Name</th>
+								  <th>Batch No</th>
+								  <th>Year</th>
+								  <th>Delivery Date </th>
+								  <th>Remarks</th>
+								  <th>Edit</th>
 								</tr>
 							</thead>
 							<tbody>		

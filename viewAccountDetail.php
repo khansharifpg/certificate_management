@@ -29,24 +29,20 @@ include_once 'includes/maincontenthome.php';
 						<table id="example1" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-								  <th>Student ID</th>
+								  <th>Local ID</th>
 								  <th>Student Name</th>
 								  <th>Paybale Amount</th>
 								  <th>Paid Amount</th>
 								  <th>Due Amount</th>
 								  <th>Fine</th>
-<<<<<<< HEAD
-								  <th>Action</th>
-=======
 								  <th>Edit</th>
->>>>>>> develop
 								</tr>
 							</thead>
 							<tbody>		
 								<?php
 								include_once("dbCon.php");
 								$conn =connect();
-								$sql="SELECT * FROM accounts_detail";
+								$sql="SELECT * FROM accounts_detail as a , students_info as s where a.local_id = s.local_id";
 								$result= $conn->query($sql);
 								foreach($result as $value){
 								 
@@ -54,26 +50,21 @@ include_once 'includes/maincontenthome.php';
 								
 								?>
 								<tr>
-								  <td><?=$value['StudentId']?></td>
-								  <td>Internet Explore</td>
+								  <td><?=$value['local_id']?></td>
+								  <td><?=$value['full_name']?></td>
 								  <td><?=$value['payable_amount']?></td>
 								  <td><?=$value['paid_amount']?></td>
 								  <td><?php $a = ($value ['payable_amount'] - $value['paid_amount']); echo $a;?></td>
 								  <td><?=$value['fine']?></td>
-								  <td><a href="addAccountDetail.php?id=<?=$value['id']?>"><button>Edit</button></td>
+								  <td><a type="button" class="btn btn-primary" href="addAccountDetail.php?id=<?=$value['id']?>">Edit</td>
 								</tr>
-<<<<<<< HEAD
-								<?php
-								}
-								?>
-=======
 							<?php } ?>
->>>>>>> develop
 								
+
 							</tbody>
 							<tfoot>
 								<tr>
-								  <th>Student ID</th>
+								  <th>Local ID</th>
 								  <th>Student Name</th>
 								  <th>Paybale Amount</th>
 								  <th>Paid Amount</th>
@@ -98,11 +89,11 @@ include_once 'includes/footer.php';
     $('#example1').DataTable()
     $('#example2').DataTable({
       'paging'      : true,
-      'lengthChange': true,
+      'lengthChange': false,
       'searching'   : false,
       'ordering'    : true,
       'info'        : true,
-      'autoWidth'   : true
+      'autoWidth'   : false
     })
   })
 </script>

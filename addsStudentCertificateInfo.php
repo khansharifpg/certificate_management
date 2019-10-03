@@ -22,7 +22,7 @@ include_once 'includes/maincontenthome.php';?>
 					<form class="form-horizontal" action="addsStudentCertificateInfoSave.php" method="POST">
 							<div class="box-body">
 								<div class="form-group">
-								  <label for="Local ID" class="col-sm-4 control-label">Student ID</label>
+								  <label for="Local ID" class="col-sm-4 control-label">Ncc ID</label>
 
 								  <div class="col-sm-8">
 									<input type="number" class="form-control" name="Studentid" placeholder="Student Id">
@@ -35,37 +35,14 @@ include_once 'includes/maincontenthome.php';?>
 								  <div class="col-sm-8">
 									<input type="text" class="form-control" name="coursename" placeholder="Course Name">
 								  </div>
-								</div>
-								
+								</div> 
 								<div class="form-group">
-								  <label for="Date" class="col-sm-4 control-label">Entry Date</label>
+								  <label for="text" class="col-sm-4 control-label">Session</label>
 
 								  <div class="col-sm-8">
-									<input type="date" class="form-control" name="entrydate" placeholder="Entry Date">
+									<input type="text" class="form-control" name="certificateremarks" placeholder="Session">
 								  </div>
-								</div>
-								
-								<div class="form-group">
-								  <label for="Date of birth" class="col-sm-4 control-label">Delivery Date</label>
-
-								  <div class="col-sm-8">
-									<input type="date" class="form-control" name="deliverydate" placeholder="Delivery Date">
-								  </div>
-								</div>
-								<div class="form-group">
-								  <label for="text" class="col-sm-4 control-label">Remarks</label>
-
-								  <div class="col-sm-8">
-									<input type="text" class="form-control" name="certificateremarks" placeholder="Remarks">
-								  </div>
-								</div>
-								<div class="form-group">
-								  <label for="Certifciate" class="col-sm-4 control-label">Certifciate Id</label>
-
-								  <div class="col-sm-8">
-									<input type="Number" class="form-control" name="certifciate_ID" placeholder="Certifciate Id">
-								  </div>
-								</div>
+								</div>  
 								
 							</div>
 							  <!-- /.box-body -->

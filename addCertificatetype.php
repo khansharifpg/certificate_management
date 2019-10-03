@@ -32,19 +32,32 @@ if(isset($_GET['id'])){
 		<div class="col-md-5 col-sm-offset-3">		
 			<div class="box box-info">
 				<div class="box-header with-border">
-				  <h3 style="color:orange;" class="box-title">Certificate Name Form </h3>
+				  <h3 style="color:orange;" class="box-title">Course Name Form </h3>
 				</div>
 				<p class="login-box-msg" style="color:red;"><?php if(isset($_SESSION['cmsg'])){echo $_SESSION['cmsg'];}?></p>
 					<form class="form-horizontal" action="addCertificatetypeSave.php" method="POST" >
 						<div class="box-body">
 							  <div class="box-body">
 								<div class="form-group">
-								  <label for="Certificate Name" class="col-sm-4 control-label">Certificate Name</label>
+								  <label for="Certificate Name" class="col-sm-4 control-label">Course Name</label>
 
 								  <div class="col-sm-8">
-									<input type="text" class="form-control" name="certificatename" placeholder="Certificate Name" value="<?php if(isset($_SESSION['certificatename'])){echo $_SESSION['certificatename'];}?>">
+									<input type="text" class="form-control" name="course" placeholder="Certificate Name">
 								  </div>
 								</div>
+								<div class="form-group">
+									<label class="col-sm-4 control-label" >Session</label>
+									
+									<div class="col-sm-8">
+									<select class="select2" name="session[]" multiple="multiple" data-placeholder="Select a Session"
+											style="width: 100%;">
+									  <option value="March" >March</option>
+									  <option value="June">June</option>
+									  <option value="September">September</option>
+									  <option value="December">December</option>
+									</select>
+									</div>
+								  </div>
 							  </div>
 							   <!-- /.box-body -->
 							<div class="box-footer">
@@ -64,5 +77,14 @@ if(isset($_GET['id'])){
  
 <?php
 include_once 'includes/footer.php';
+?>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+  })
+ </script>
+ 
+ <?php
 include_once 'includes/footer_2.php';
 ?>

@@ -109,8 +109,11 @@ $id=$_GET['id'];
 								<div class="form-group">
 								  <label for="Library clearence" class="col-sm-4 control-label">LIBRARY CLEARENCE</label>
 
-								  <div class="col-sm-8">
-									<input type="text" class="form-control" name="libraryclearence" placeholder="Library clearence">
+								   <div class="col-sm-8">
+									<select class="form-control select2" name="libraryclearence" style="width: 100%;">
+									  <option value="0" selected="selected">Yes</option>
+									  <option value="1">No</option>
+									</select>
 								  </div>
 								</div>
 								

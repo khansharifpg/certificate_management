@@ -7,7 +7,7 @@ include_once 'includes/maincontenthome.php';
 
 	<section class="content-header">
       <h1>      
-         <a class="btn btn-primary"  href="addCertificatetype.php" role="button" style="background-color:green" > <i class="fa fa-plus" aria-hidden="true"></i> Add Certificate Name </a>
+         <a class="btn btn-primary"  href="addCertificatetype.php" role="button" style="background-color:green" > <i class="fa fa-plus" aria-hidden="true"></i> Add Course Name </a>
       </h1>
 	  
       <ol class="breadcrumb">
@@ -18,51 +18,46 @@ include_once 'includes/maincontenthome.php';
 <!-- Main content -->
     <section class="content">
 		<div class="row">
-			<div class="col-xs-12">
-				  
+			<div class="col-xs-10"> 
 				<div class="box">
 					<div class="box-header">
-					  <h3 class="box-title">Certificate Names Data Table </h3>
+					  <h3 class="box-title">All Course Names Table </h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
 						<table id="example1" class="table table-bordered table-striped">
 							<thead>
 								<tr>
-								  <th>Local ID</th>
-								  <th>NCC ID</th>
-								  <th>Student Name</th>
-								  <th>Certificate Name</th> 
-								  <th>Batch</th>
-								  <th>Year</th> 
-								  <th>Action</th> 
-								  
+								  <th>Course Name</th> 
+								  <th>Session</th> 
+								  <th>Action</th>
 								</tr>
 							</thead>
 							<tbody>	
 								<?php 
-								include_once("dbCon.php");
-
-								$conn =connect();
-								
-								$sql= "SELECT * FROM certificate_nametype";
-								//echo $sql;
-								
+								include_once("dbCon.php"); 
+								$conn =connect(); 
+								$sql= "SELECT * FROM course_info";
+								//echo $sql; 
 								$result=$conn->query($sql);
-								//print_r($result);
+								//print_r($result); 
+								foreach($result as $value){ 
+								?> 
+								<tr>
+								  <td><?=$value['course']?></td>
+								  <td><?php
+								  $id=$value['id'];
+								  $sql= "SELECT * FROM session_info Where course_id='$id'";
+							
+								$result=$conn->query($sql);
+								//print_r($result); 
+								foreach($result as $row){ 
 								
-								foreach($result as $value){
-								
-								?>
-								
-								<tr> 
-								  <td>Internet Explorer 4.5</td>
-								  <td>Mac OS 8-9</td>
-								  <td>-</td>
-								  <td><?=$value['Certifiate_name']?></td>
-								  <td>X</td>
-								  <td>X</td>
-								  <td><a href="addCertificatetype.php?id=<?=$value['id']?>"><button>Edit</button></td>
+								echo $row['session'];echo '  &nbsp; | &nbsp;  ';
+								}
+								  
+								  ?></td>
+								  <td><a type="button" class="btn btn-primary" href="addCertificatetype.php?id=<?=$value['id']?>">Edit</td> 
 								</tr>
 								<?php
 								}
@@ -70,12 +65,8 @@ include_once 'includes/maincontenthome.php';
 							</tbody>
 							<tfoot>
 								<tr>
-								  <th>Local ID</th>
-								  <th>NCC ID</th>
-								  <th>Student Name</th>
-								  <th>Certificate Name</th> 
-								  <th>Batch</th>
-								  <th>Year</th>
+								  <th>Course Name</th>
+								  <th>Session</th>
 								  <th>Action</th>
 								</tr>
 							</tfoot>
@@ -95,7 +86,7 @@ include_once 'includes/footer.php';
     $('#example1').DataTable()
     $('#example2').DataTable({
       'paging'      : true,
-      'lengthChange': false,
+      'lengthChange': true,
       'searching'   : false,
       'ordering'    : true,
       'info'        : true,

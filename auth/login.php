@@ -31,7 +31,7 @@
 <body class="hold-transition login-page">
 	<div class="login-box">
 	  <div class="login-logo">
-		<a ><b>Admin</b>LTE</a>
+		<a ><b>Certificate</b><br>Management System</a>
 	  </div>
 	  <!-- /.login-logo -->
 	  <div class="login-box-body">
@@ -59,11 +59,6 @@
 		  </div>
 		</form>
 
-	   
-		<!-- /.social-auth-links -->
-
-		<a href="#">I forgot my password</a><br>
-		<a href="register.php" class="text-center">Register a new membership</a>
 
 	  </div>
 	  <!-- /.login-box-body -->

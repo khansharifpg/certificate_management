@@ -1,9 +1,9 @@
 <?php
-session_start();
-include_once 'includes/head.php';
+include_once 'signinchecker.php';
 include_once 'includes/header.php';
-include_once 'includes/sidenavbar.php';
-include_once 'includes/maincontenthome.php';?>
+include_once 'includes/navbar.php';
+include_once 'includes/sidebar.php';
+?>
 <!-- Content Header (Page header) -->
 
 <?php
@@ -34,7 +34,7 @@ $id=$_GET['id'];
       </ol>
     </section>
 	<section>
-		<div class="col-md-4 col-sm-offset-3">		
+		<div class="col-md-6 col-sm-offset-3">		
 			<div class="box box-info">
 					<div class="box-header with-border">
 					  <h3 style="color:orange;" class="box-title">Student Information Form </h3>
@@ -122,8 +122,7 @@ $id=$_GET['id'];
 							  <!-- /.box-body -->
 							<div class="box-footer">
 								 <a class="btn btn-primary" href="viewStudentInfo.php" role="button" style="background-color:red">Back</a>
-								<button type="submit" class="btn btn-info pull-right" style="background-color:green" name="student_submit">Submit</button>
-								<button type="submit" class="btn btn-default pull-right" style="margin-right: 14px" name="student_reset" >Reset</button>
+								<button type="submit" class="btn btn-info pull-right" style="background-color:green" name="student_submit">Submit</button> 
 							</div>
 					</form>				
 			</div> 									

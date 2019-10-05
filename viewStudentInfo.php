@@ -1,8 +1,8 @@
 <?php
-include_once 'includes/head.php';
+include_once 'signinchecker.php';
 include_once 'includes/header.php';
-include_once 'includes/sidenavbar.php';
-include_once 'includes/maincontenthome.php';
+include_once 'includes/navbar.php';
+include_once 'includes/sidebar.php';
 ?>  
 
 <section class="content-header">

@@ -3,7 +3,7 @@
 <div class="pull-right hidden-xs">
   <b>Version</b> 2.4.18
 </div>
-<strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE</a>.</strong> All rights
+<strong>Copyright &copy; 2014-2019 CMS</strong> All rights
 reserved.
 </footer>
 
@@ -53,3 +53,5 @@ reserved.
 <script src="dist/js/demo.js"></script>
 
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
+</body>
+</html>

@@ -4,22 +4,21 @@ include_once("dbCon.php");
 
 $conn =connect();
 
-if(isset($_POST["course_submit"])){
+if(isset($_POST["student_submit"])){
 	
-	$Student_Id =$_POST['StudentId'];
+	$id =$_POST['ncc_id'];
 	
-	$batche_No = $_POST['batcheNo'];
+	$course_Name = $_POST['course'];
 
-	$Course_Name = $_POST['CourseName'];
+	$session = $_POST['session'];
 
-	$EntryYear = $_POST['EnYear'];
-	
 
-	$sql="INSERT INTO student_course(StudentId,	batch, 	course_name, year ) VALUES('$Student_Id', '$batche_No','$Course_Name', '$EntryYear')";
+	$sql="INSERT INTO student_course(ncc_id, session, course_id) 
+		  VALUES('$id', '$session', '$course_Name')";
 		
-	echo $sql;
+	//echo $sql;
 	if($conn->query($sql)){
-	echo "Added successfully";
+		header("Location:mailsent.php?id=$id");
 	}
 	else {
 	 echo "not succesfull";

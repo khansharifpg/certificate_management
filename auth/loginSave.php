@@ -20,14 +20,14 @@ if($_POST['password']==null){
 
 if(isset($_POST["login"])&& $valid==true){
 $email_username=$_POST['email'];
-$password=md5($_POST['password']);
+$password=$_POST['password'];
 
 $sql=" SELECT * FROM user where email ='$email_username' AND pass='$password'";
-								
+			
             $result = $conn->query($sql);
 					
               if($result->num_rows>0){
-	               $_SESSION['isLoggedIn'] = TRUE;
+	               $_SESSION['isLoggedIn']=TRUE;
 					foreach($result as $row){
 							$_SESSION['email']=$row['email'];
 							$_SESSION['fullname']=$row['fullname'];
@@ -36,7 +36,7 @@ $sql=" SELECT * FROM user where email ='$email_username' AND pass='$password'";
 	header('Location:../index.php');
 }else{
 	$_SESSION['lmsg']="invalid login";
-	header('Location:reg.php');
+	header('Location:login.php');
 }
 }elseif($valid==false){
 	$_SESSION['lmsg']="invalid login";

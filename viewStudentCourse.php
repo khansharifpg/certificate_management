@@ -21,6 +21,7 @@ if(isset($_POST['delivery'])){
 	
 }
 ?>
+
 	<section class="content-header">
        <h1>      
          <a class="btn btn-primary"  href="addStudentCourse.php" role="button" style="background-color:green"> <i class="fa fa-plus" aria-hidden="true"></i> Add Student Certificate Info </a>
@@ -207,6 +208,11 @@ include_once 'includes/footer.php';
   $('#checkAll').click(function () {    
      $('input:checkbox').prop('checked', this.checked);    
  });
+ 
+ 
+ 
+ 
+ 
 </script>
 <?php
 include_once 'includes/footer_2.php';

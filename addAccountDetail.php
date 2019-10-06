@@ -5,11 +5,30 @@ include_once 'includes/navbar.php';
 include_once 'includes/sidebar.php';
 ?>
 <!-- Content Header (Page header) -->
+<style>
+form label {
+  display: inline-block;
+  width: 100px;
+}
 
+form div {
+  margin-bottom: 5px;
+}
+
+.error {
+  color: red;
+  margin-left: 5px;
+  font-weight:bold;
+  font-size:15px;
+}
+
+label.error {
+  display: inline;
+}
+
+</style>
 <?php
 if(isset($_GET['id'])){
-
-
 $id=$_GET['id'];
 
 				include_once("dbCon.php");
@@ -40,13 +59,13 @@ $id=$_GET['id'];
 					</div>
 					
 				<p class="login-box-msg"><?php if (isset($_SESSION['amsg'])){echo $_SESSION['amsg'];}?></p>
-						<form class="form-horizontal" action="addAccountDetailSave.php" method="POST">
+						<form class="form-horizontal" onsubmit="return nullcheck();" action="addAccountDetailSave.php" method="POST">
 							<div class="box-body">
 								<div class="form-group">
 								  <label for="StudentID" class="col-sm-4 control-label">Local ID</label>
 
 								  <div class="col-sm-8">
-									<input type="number" class="form-control" name="studentid" placeholder="Student Id" value= "<?php 
+									<input type="text" id="local_id" class="form-control" name="studentid" onkeyup="return ontype();" placeholder="Student Id" value= "<?php 
 									if(isset($row['StudentId'])){	
 										echo $row['StudentId'];}
 									?>">
@@ -57,7 +76,7 @@ $id=$_GET['id'];
 								  <label for="Payable" class="col-sm-4 control-label">Payable Amount</label>
 
 								  <div class="col-sm-8">
-									<input type="number" class="form-control" name="payableamount" placeholder="Payable amount" value= "<?php 
+									<input type="text" id="pay_amount" class="form-control" name="payableamount" oninput="ontype();" placeholder="Payable amount" value= "<?php 
 									if(isset($row['payable_amount'])){	
 										echo $row['payable_amount'];}
 									?>">
@@ -68,7 +87,7 @@ $id=$_GET['id'];
 								  <label for="PAID" class="col-sm-4 control-label">Paid Amount</label>
 
 								  <div class="col-sm-8">
-									<input type="Number" class="form-control" name="paidamount" placeholder="Paid Amount" value= "<?php 
+									<input type="text" id="paid_amount"  class="form-control" name="paidamount" oninput="ontype();" placeholder="Paid Amount" value= "<?php 
 									if(isset($row['paid_amount'])){	
 										echo $row['paid_amount'];}
 									?>">
@@ -80,7 +99,7 @@ $id=$_GET['id'];
 								  <label for="fine" class="col-sm-4 control-label">Fine</label>
 
 								  <div class="col-sm-8">
-									<input type="Number" class="form-control" name="fine" placeholder="Fine" value= "<?php 
+									<input type="text" id="a_fine" oninput="ontype();" class="form-control" name="fine" placeholder="Fine" value= "<?php 
 									if(isset($row['fine'])){	
 										echo $row['fine'];}
 									?>">
@@ -90,12 +109,68 @@ $id=$_GET['id'];
 							   <!-- /.box-body -->
 							<div class="box-footer">
 								 <a class="btn btn-primary" href="viewAccountDetail.php" role="button" style="background-color:red">Back</a>
-								<button type="submit" class="btn btn-info pull-right" style="background-color:green" name="acount_submit">Submit</button>
+								<button type="submit" class="btn btn-info pull-right" style="background-color:green" id="acount_submit" name="acount_submit" >Submit</button>
 							</div>
 						</form>			
 			</div> 									
 		</div>
-	</section>           
+	</section> 
+
+<script>
+	function nullcheck(){
+			
+		$(".error").remove(); 
+		
+		if($('#local_id').val()==''){
+			$('#local_id').after('<span class="error">* This field is required</span>');
+			return false;
+		}
+		
+		if($('#pay_amount').val()==''){
+			$('#pay_amount').after('<span class="error">* This field is required</span>');
+			return false;
+		}
+		
+		if($('#paid_amount').val()==''){
+			$('#paid_amount').after('<span class="error">* This field is required</span>');
+			return false;
+		}
+		
+	
+	}
+ 
+ function ontype(){
+    $(".error").remove();
+	
+	$('#acount_submit').removeAttr('disabled',true);
+	
+	 if (isNaN( $("#local_id").val() )) {
+		 
+		$('#local_id').after('<span class="error">* Local Id is numeric!!</span>');
+		$('#acount_submit').attr('disabled',true);
+		
+	}else if(isNaN($("#pay_amount").val() )){
+		
+		$('#pay_amount').after('<span class="error">* Payable amount is numeric!!</span>');
+		$('#acount_submit').attr('disabled',true);
+		
+	}else if(isNaN($("#paid_amount").val() )){
+		$('#paid_amount').after('<span class="error">* Paid amount is numeric!!</span>');
+		$('#acount_submit').attr('disabled',true);
+		
+	}else if(isNaN($("#a_fine").val() )){
+		$('#a_fine').after('<span class="error">* Paid amount is numeric!!</span>');
+		$('#acount_submit').attr('disabled',true);
+	}else if($("#local_id").val() < 0){
+		
+		$('#local_id').after('<span class="error">* 0 or minus value not accepted!!</span>');
+		$('#acount_submit').attr('disabled',true);
+		
+	}
+	
+	
+ }
+</script>	
 
 <?php
 
@@ -104,3 +179,5 @@ include_once 'includes/footer.php';
 
 ?>
 
+</body>
+</html>

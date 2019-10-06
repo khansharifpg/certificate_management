@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2019 at 03:24 PM
+-- Generation Time: Oct 06, 2019 at 01:24 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -29,8 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `accounts_detail` (
-  `id` int(11) NOT NULL,
-  `StudentId` int(11) NOT NULL,
+  `local_id` int(11) NOT NULL,
   `payable_amount` double NOT NULL,
   `paid_amount` double NOT NULL,
   `due` double NOT NULL,
@@ -41,40 +40,97 @@ CREATE TABLE `accounts_detail` (
 -- Dumping data for table `accounts_detail`
 --
 
-INSERT INTO `accounts_detail` (`id`, `StudentId`, `payable_amount`, `paid_amount`, `due`, `fine`) VALUES
-(1, 11, 11, 11, 11, 11),
-(2, 11, 11, 11, 11, 11),
-(3, 11, 11, 11, 11, 111),
-(4, 11, 11, 11, 11, 111),
-(5, 11, 11, 11, 11, 111),
-(6, 11, 11, 11, 11, 111),
-(7, 11, 11, 11, 11, 110);
+INSERT INTO `accounts_detail` (`local_id`, `payable_amount`, `paid_amount`, `due`, `fine`) VALUES
+(-1, 3000, 2222, 778, 0),
+(33, 3000, 33, 2967, 44),
+(111, 1000, 500, 500, 0),
+(1000876, 1000, 500, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `certificate_nametype`
+-- Table structure for table `course_info`
 --
 
-CREATE TABLE `certificate_nametype` (
+CREATE TABLE `course_info` (
   `id` int(11) NOT NULL,
-  `Certifiate_name` varchar(200) NOT NULL
+  `course` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `certificate_nametype`
+-- Dumping data for table `course_info`
 --
 
-INSERT INTO `certificate_nametype` (`id`, `Certifiate_name`) VALUES
-(1, 'assssssssssssssssss'),
-(10, 'assssssssssssssssss'),
-(11, 'assssssssssssssssss'),
-(12, 'assssssssssssssssss'),
-(13, 'sss'),
-(14, 'ujjjjjj'),
-(15, 'juuuu'),
-(16, 'juuuu'),
-(17, 'khan');
+INSERT INTO `course_info` (`id`, `course`) VALUES
+(150315, 'IFY'),
+(793607, 'l4dc');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `session_info`
+--
+
+CREATE TABLE `session_info` (
+  `id` int(20) NOT NULL,
+  `course_id` int(50) NOT NULL,
+  `session` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `session_info`
+--
+
+INSERT INTO `session_info` (`id`, `course_id`, `session`) VALUES
+(1, 150315, 'December'),
+(2, 793607, 'March'),
+(3, 793607, 'June'),
+(4, 793607, 'September'),
+(5, 793607, 'December');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `students_info`
+--
+
+CREATE TABLE `students_info` (
+  `local_id` varchar(11) NOT NULL,
+  `ncc_id` varchar(11) NOT NULL,
+  `full_name` varchar(60) NOT NULL,
+  `dob` date NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(16) NOT NULL,
+  `library_clearance` tinyint(1) NOT NULL COMMENT '0=clear(yes)'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `students_info`
+--
+
+INSERT INTO `students_info` (`local_id`, `ncc_id`, `full_name`, `dob`, `email`, `phone`, `library_clearance`) VALUES
+('1000876', '00171363', 'Sharif Ahamed Khan', '1998-09-20', '1000876@daffodil.ac', '01836691343', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_course`
+--
+
+CREATE TABLE `student_course` (
+  `id` int(11) NOT NULL,
+  `ncc_id` varchar(11) NOT NULL,
+  `session` varchar(200) NOT NULL,
+  `course_id` varchar(200) NOT NULL,
+  `delivery_date` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `student_course`
+--
+
+INSERT INTO `student_course` (`id`, `ncc_id`, `session`, `course_id`, `delivery_date`) VALUES
+(1, '00171363', '1', '150315', '06-10-2019');
 
 -- --------------------------------------------------------
 
@@ -85,7 +141,6 @@ INSERT INTO `certificate_nametype` (`id`, `Certifiate_name`) VALUES
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `fullname` varchar(50) NOT NULL,
-  `username` varchar(30) NOT NULL,
   `email` varchar(255) NOT NULL,
   `pass` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -94,13 +149,8 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `fullname`, `username`, `email`, `pass`) VALUES
-(1, 'shuvo', 'shuvo', 'shuvo@daffodil.ac', '698d51a19d8a121ce581499d7b701668'),
-(3, 'khan', 'khan', 'khan@gmail.com', '698d51a19d8a121ce581499d7b701668'),
-(4, 'khan', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(9, 'tanvir', 'kh', 'sakhan70774@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b'),
-(13, 'ahamded', 'ah', 'a@gmail.com', '698d51a19d8a121ce581499d7b701668'),
-(18, 'j', 'w', 'w@g.com', 'c4ca4238a0b923820dcc509a6f75849b');
+INSERT INTO `user` (`id`, `fullname`, `email`, `pass`) VALUES
+(1, 'Bablu Molla', 'x@g.com', '12345');
 
 --
 -- Indexes for dumped tables
@@ -110,12 +160,32 @@ INSERT INTO `user` (`id`, `fullname`, `username`, `email`, `pass`) VALUES
 -- Indexes for table `accounts_detail`
 --
 ALTER TABLE `accounts_detail`
+  ADD PRIMARY KEY (`local_id`);
+
+--
+-- Indexes for table `course_info`
+--
+ALTER TABLE `course_info`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `certificate_nametype`
+-- Indexes for table `session_info`
 --
-ALTER TABLE `certificate_nametype`
+ALTER TABLE `session_info`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `students_info`
+--
+ALTER TABLE `students_info`
+  ADD PRIMARY KEY (`local_id`),
+  ADD UNIQUE KEY `ncc_id` (`ncc_id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `student_course`
+--
+ALTER TABLE `student_course`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -123,7 +193,6 @@ ALTER TABLE `certificate_nametype`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
@@ -131,22 +200,22 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT for table `accounts_detail`
+-- AUTO_INCREMENT for table `session_info`
 --
-ALTER TABLE `accounts_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+ALTER TABLE `session_info`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `certificate_nametype`
+-- AUTO_INCREMENT for table `student_course`
 --
-ALTER TABLE `certificate_nametype`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+ALTER TABLE `student_course`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -428,8 +428,8 @@ $conn = connect();
 							<td class='content-cell'>
 							<h1>Hi , </h1>
 							<p>Your certificate is ready!</p>
-							<p><strong>Please check your portal. </strong></p>
-							<p>http://localhost/cm/login</p>
+							<p><strong>Please check your portal.</strong></p>
+							<p>http://localhost/cm/auth/login</p>
 							<!-- Action -->
 							<table class='body-action' align='center' width='100%' cellpadding='0' cellspacing='0'>
 								<tr>
@@ -493,8 +493,8 @@ $conn = connect();
 		$mail ->Port = 465; // or 587
 		$mail->setFrom('DIA', 'DIA');
 		$mail ->IsHTML(true);
-		$mail ->Username = "Tonmoytouhid589@gmail.com";
-		$mail ->Password = "TONMOY1234567890";
+		$mail ->Username = "sharifahamedkhan1@gmail.com";
+		$mail ->Password = "khan5426khan";
 		$mail->setFrom('OnTrac BD', 'OnTrac BD');
 		$mail ->Subject = $mailSub;
 		$mail ->Body = $mailMsg;

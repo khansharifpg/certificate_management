@@ -134,6 +134,6 @@ $id=$_GET['id'];
 
 //Addd new content
 include_once 'includes/footer.php';
-include_once 'includes/footer_2.php';
-
 ?>
+</body>
+</html>

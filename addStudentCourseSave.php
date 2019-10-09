@@ -25,4 +25,19 @@ if(isset($_POST["student_submit"])){
 	}
 }
 
+if(isset($_POST['id'])){
+	$id = $_POST['id'];
+	$sql = "SELECT * FROM session_info where course_id='$id' ";
+	$result = $conn->query($sql);
+	$array;
+	while($row=mysqli_fetch_array($result)){
+		$array[] = [
+		   'course_id'=>$row['course_id'],
+		   'session'=>$row['session'],
+		];
+	};
+	echo json_encode($array);
+	
+}
+
 ?>

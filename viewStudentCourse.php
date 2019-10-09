@@ -1,6 +1,37 @@
 <?php
 include_once 'signinchecker.php';
 include_once 'includes/header.php';
+?>
+<script>
+
+function datasession(){
+		var id = $('#courseID').val();
+		var sess = $('#session');
+		var a="";
+		$.ajax({
+			type:'POST',
+			url:'addStudentCourseSave.php',
+			data:{id:id},
+			dataType:"json",
+			success : function(response){
+				for(var i=0;i<response.length ;i++){
+					
+					a += "<option>"+response[i].session+"</option>";
+					console.log(a)
+					
+				}
+				sess.innerHTML = a;
+			}
+			
+		});
+		
+		
+	}
+
+
+
+</script>
+<?php
 include_once 'includes/navbar.php';
 include_once 'includes/sidebar.php';
 ?>  
@@ -46,7 +77,8 @@ if(isset($_POST['delivery'])){
           	<div class="form-group">
 			  <label for="Certificate Name" class="col-sm-4 control-label">Course :</label>
 			  <div class="col-sm-8">
-				<select class="form-control select2" name="course" style="width: 100%;">
+				<select onchange="datasession()" id="courseID"  class="form-control select2" name="course" style="width: 100%;">
+					<option>Select from here</option>
 				<?php 
 					include_once("dbCon.php");
 					$conn =connect();
@@ -66,18 +98,8 @@ if(isset($_POST['delivery'])){
           	<div class="form-group">
 			  <label for="Certificate Name" class="col-sm-4 control-label">Session :</label>
 			  <div class="col-sm-8">
-				<select class="form-control select2" name="session" style="width: 100%;">
-				<?php 
-					include_once("dbCon.php");
-					$conn =connect();
-					$sql="SELECT * FROM session_info";
-					$result= $conn->query($sql);
-					foreach($result as $value){
-				?>
-				  <option value="<?=$value['id']?>" ><?=$value['session']?></option>
-				 <?php
-					}
-				 ?>
+				<select class="form-control select2" name="session" id = "session" style="width: 100%;">
+				
 				</select>
 				</div>
 			</div>
@@ -194,6 +216,11 @@ include_once 'includes/footer.php';
 ?>
 
 <script>
+
+
+
+
+
   $(function () {
     $('#example1').DataTable()
     $('#example2').DataTable({
@@ -210,10 +237,6 @@ include_once 'includes/footer.php';
  });
  
  
- 
- 
- 
 </script>
-<?php
-include_once 'includes/footer_2.php';
-?>
+</html>
+</body>

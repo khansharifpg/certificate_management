@@ -56,16 +56,15 @@ $id=$_GET['id'];
 			<div class="box box-info" >
 					<div class="box-header with-border">
 					  <h3 style="color:orange;" class="box-title"  >Account Information Form </h3>
-					</div>
-					
-				<p class="login-box-msg"><?php if (isset($_SESSION['amsg'])){echo $_SESSION['amsg'];}?></p>
+					</div> 
+				
 						<form class="form-horizontal" onsubmit="return nullcheck();" action="addAccountDetailSave.php" method="POST">
 							<div class="box-body">
 								<div class="form-group">
 								  <label for="StudentID" class="col-sm-4 control-label">Local ID</label>
 
 								  <div class="col-sm-8">
-									<input type="text" id="local_id" class="form-control" name="studentid" onkeyup="return ontype();" placeholder="Student Id" value= "<?php 
+									<input type="text" id="local_id" class="form-control" name="studentid" oninput="ontype();" placeholder="Student Id" value= "<?php 
 									if(isset($row['StudentId'])){	
 										echo $row['StudentId'];}
 									?>">
@@ -108,7 +107,7 @@ $id=$_GET['id'];
 							</div>
 							   <!-- /.box-body -->
 							<div class="box-footer">
-								 <a class="btn btn-primary" href="viewAccountDetail.php" role="button" style="background-color:red">Back</a>
+								 <a class="btn btn-primary" href="viewAccountDetail" role="button" style="background-color:red">Back</a>
 								<button type="submit" class="btn btn-info pull-right" style="background-color:green" id="acount_submit" name="acount_submit" >Submit</button>
 							</div>
 						</form>			
@@ -149,24 +148,40 @@ $id=$_GET['id'];
 		$('#local_id').after('<span class="error">* Local Id is numeric!!</span>');
 		$('#acount_submit').attr('disabled',true);
 		
+	}else if($("#local_id").val() <= 0){
+		
+		$('#local_id').after('<span class="error">* 0 or minus value not accepted!!</span>');
+		$('#acount_submit').attr('disabled',true);
+		
 	}else if(isNaN($("#pay_amount").val() )){
 		
 		$('#pay_amount').after('<span class="error">* Payable amount is numeric!!</span>');
+		$('#acount_submit').attr('disabled',true);
+		
+	}else if($("#pay_amount").val() <= 0){
+		
+		$('#pay_amount').after('<span class="error">* 0 or minus value not accepted!!</span>');
 		$('#acount_submit').attr('disabled',true);
 		
 	}else if(isNaN($("#paid_amount").val() )){
 		$('#paid_amount').after('<span class="error">* Paid amount is numeric!!</span>');
 		$('#acount_submit').attr('disabled',true);
 		
-	}else if(isNaN($("#a_fine").val() )){
+	}else if($("#paid_amount").val() <= 0){
+	
+		$('#paid_amount').after('<span class="error">* 0 or minus value not accepted!!</span>');
+		$('#acount_submit').attr('disabled',true);
+	
+   }else if(isNaN($("#a_fine").val() )){
 		$('#a_fine').after('<span class="error">* Paid amount is numeric!!</span>');
 		$('#acount_submit').attr('disabled',true);
-	}else if($("#local_id").val() < 0){
-		
-		$('#local_id').after('<span class="error">* 0 or minus value not accepted!!</span>');
+	}else if($("#a_fine").val() < 0){
+	
+		$('#a_fine').after('<span class="error">* minus value not accepted!!</span>');
 		$('#acount_submit').attr('disabled',true);
-		
-	}
+	
+   }
+	
 	
 	
  }

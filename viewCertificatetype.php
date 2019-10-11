@@ -8,7 +8,7 @@ include_once 'includes/sidebar.php';
 
 	<section class="content-header">
       <h1>      
-         <a class="btn btn-primary"  href="addCertificatetype.php" role="button" style="background-color:green" > <i class="fa fa-plus" aria-hidden="true"></i> Add Course Name </a>
+         <a class="btn btn-primary"  href="addCertificatetype" role="button" style="background-color:green" > <i class="fa fa-plus" aria-hidden="true"></i> Add Course Name </a>
       </h1>
 	  
       <ol class="breadcrumb">
@@ -95,6 +95,5 @@ include_once 'includes/footer.php';
     })
   })
 </script>
-<?php
-include_once 'includes/footer_2.php';
-?> 
+</body>
+</html>

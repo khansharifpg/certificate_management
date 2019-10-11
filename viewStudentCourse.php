@@ -45,7 +45,7 @@ if(isset($_POST['delivery'])){
 
 	<section class="content-header">
        <h1>
-         <a class="btn btn-primary"  href="addStudentCourse.php" role="button" style="background-color:green"> <i class="fa fa-plus" aria-hidden="true"></i> Add Student Certificate Info </a>
+         <a class="btn btn-primary"  href="addStudentCourse" role="button" style="background-color:green"> <i class="fa fa-plus" aria-hidden="true"></i> Add Student Certificate Info </a>
       </h1>
 
       <ol class="breadcrumb">

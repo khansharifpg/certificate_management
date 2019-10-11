@@ -8,6 +8,29 @@ if(isset($_GET['id'])){
 	$id=$_GET['id'];
 }
 ?>
+<!-- INLINE CSS -->
+<style>
+form label {
+  display: inline-block;
+  width: 100px;
+}
+
+form div {
+  margin-bottom: 5px;
+}
+
+.error {
+  color: red;
+  margin-left: 5px;
+  font-weight:bold;
+  font-size:15px;
+}
+
+label.error {
+  display: inline;
+}
+
+</style>
 <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -23,23 +46,23 @@ if(isset($_GET['id'])){
 			<div class="box box-info">
 				<div class="box-header with-border">
 				  <h3 style="color:orange;" class="box-title">Course Name Form </h3>
-				</div>
-				<p class="login-box-msg" style="color:red;"><?php if(isset($_SESSION['cmsg'])){echo $_SESSION['cmsg'];}?></p>
-					<form class="form-horizontal" action="addCertificatetypeSave.php" method="POST" >
+				</div> 
+				
+					<form class="form-horizontal" onsubmit="return nullcheck();"  action="addCertificatetypeSave.php" method="POST" >
 						<div class="box-body">
 							  <div class="box-body">
 								<div class="form-group">
 								  <label for="Certificate Name" class="col-sm-4 control-label">Course Name</label>
 
 								  <div class="col-sm-8">
-									<input type="text" class="form-control" name="course" placeholder="Certificate Name">
+									<input type="text" id="certificate" class="form-control" name="course" oninput="ontype();" placeholder="Certificate Name">
 								  </div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-4 control-label" >Session</label>
 									
-									<div class="col-sm-8">
-									<select class="select2" name="session[]" multiple="multiple" data-placeholder="Select a Session"
+									<div class="col-sm-8 ">
+									<select id="selectSess" class="select2" name="session[]" multiple="multiple" data-placeholder="Select a Session"
 											style="width: 100%;">
 									  <option value="March" >March</option>
 									  <option value="June">June</option>
@@ -51,11 +74,11 @@ if(isset($_GET['id'])){
 							  </div>
 							   <!-- /.box-body -->
 							<div class="box-footer">
-								 <a class="btn btn-danger" href="viewCertificatetype.php" role="button">Back</a>
+								 <a class="btn btn-danger" href="viewCertificatetype" role="button">Back</a>
 								<?php if (isset($_GET['id'])){ ?>
 								<button type="submit" class="btn btn-info pull-right" name="certificate_submit">Edit</button>
 								<?php }else{ ?>
-								<button type="submit" class="btn btn-success pull-right" name="certificate_submit">Submit</button>
+								<button type="submit" id="certifi_submit" class="btn btn-success pull-right" name="certificate_submit">Submit</button>
 								<?php } ?> 
 							</div>
 						</div>	
@@ -63,6 +86,36 @@ if(isset($_GET['id'])){
 			</div> 									
 		</div>
 	</section>
+	
+<script>
+  	function nullcheck(){
+			
+		$(".error").remove(); 
+		
+		if($('#certificate').val()==''){
+			$('#certificate').after('<span class="error">* Please type a certificate Name</span>');
+			return false;
+		}
+		
+		
+		if($('#selectSess').val()==''){
+			$('#selectSess').after('<span class="error">* Please select particular sessions</span>');
+			return false;
+		}
+		
+	}
+		function ontype(){
+		$(".error").remove();
+		
+		$('#certifi_submit').removeAttr('disabled',true);
+		
+		 if(!/^[a-z ]+$/i.test($("#certificate").val() )){
+			$('#certificate').after('<span class="error">* Course name can not be is numeric!!</span>');
+			$('#certifi_submit').attr('disabled',true);
+		}
+	
+ }
+</script> 
  
 <?php
 include_once 'includes/footer.php';
@@ -74,6 +127,5 @@ include_once 'includes/footer.php';
   })
  </script>
  
- <?php
-include_once 'includes/footer_2.php';
-?>
+</body>
+</html>

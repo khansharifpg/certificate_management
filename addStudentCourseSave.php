@@ -25,6 +25,7 @@ if(isset($_POST["student_submit"])){
 	}
 }
 
+// ajax for certificate info
 if(isset($_POST['id'])){
 	$id = $_POST['id'];
 	$sql = "SELECT * FROM session_info where course_id='$id' ";

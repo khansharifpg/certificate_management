@@ -1,8 +1,35 @@
 <?php
 include_once 'signinchecker.php';
 include_once 'includes/header.php';
+?>
+<script>
+
+function  datacourse(){
+	//alert('ok');
+	var id = $('#courseID').val();
+	var sess = $('#session');
+	$.ajax({
+	type:'POST',
+	url:'addStudentCourseSave.php',
+	data:{id,id},
+	dataType:"json",
+	success : function(response){
+		//console.log(response);
+		for(var i=0;i<response.length ;i++){
+					$('#session').empty();
+				for(var i=0;i<response.length ;i++){
+					$('#session').append('<option value="'+response[i].id+'">'+response[i].session+'</option>');
+				}
+			}
+		}
+		})
+	
+}
+</script>
+
+<?php
 include_once 'includes/navbar.php';
-include_once 'includes/sidebar.php';
+include_once 'includes/sidebar.php'
 ?>
 <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -28,7 +55,7 @@ include_once 'includes/sidebar.php';
 								  <label for="Local ID" class="col-sm-4 control-label">Ncc ID</label>
 
 								  <div class="col-sm-8">
-									<input type="number" class="form-control" name="ncc_id" placeholder="Student Id">
+									<input type="number" class="form-control" name="ncc_id" placeholder="Ncc Id">
 								  </div>
 								</div>
 								
@@ -36,7 +63,8 @@ include_once 'includes/sidebar.php';
 								  <label for="Course Name" class="col-sm-4 control-label">Course Name</label>
 
 								  <div class="col-sm-8">
-									<select class="form-control select2" name="course" style="width: 100%;">
+									<select onchange="datacourse()" id="courseID" class="form-control select2" name="course" style="width: 100%;">
+									<option>Select Course name</option>
 									<?php 
 										include_once("dbCon.php");
 										$conn =connect();
@@ -57,20 +85,8 @@ include_once 'includes/sidebar.php';
 								  <label for="text" class="col-sm-4 control-label">Session</label>
 
 								  <div class="col-sm-8">
-									<select class="form-control select2" name="session" style="width: 100%;">
-									<?php 
-										include_once("dbCon.php");
-										$conn =connect();
-										$sql="SELECT * FROM session_info";
-										$result= $conn->query($sql);
-										foreach($result as $value){
-										
-										
-									?>
-									  <option value="<?=$value['id']?>" ><?=$value['session']?></option>
-									 <?php
-										}
-									 ?>
+									<select class="form-control select2" name="session" id = "session" style="width: 100%;">
+									
 									</select>
 								  </div>
 								</div>  
@@ -91,6 +107,6 @@ include_once 'includes/sidebar.php';
 
 //Addd new content
 include_once 'includes/footer.php';
-include_once 'includes/footer_2.php';
-
 ?>
+</body>
+</html>

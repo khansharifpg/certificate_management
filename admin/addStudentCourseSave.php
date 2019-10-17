@@ -18,10 +18,11 @@ if(isset($_POST["student_submit"])){
 		
 	//echo $sql;
 	if($conn->query($sql)){
-		header("Location:mailsent.php?id=$id");
+		header("Location:mailsent.php?id=$id&&cd=$course_Name&&ss=$session");
 	}
 	else {
-	 echo "not succesfull";
+	 $_SESSION['emsg']="Something Went wrong!! Try Again later";
+	 header('Location:addStudentCourse');
 	}
 }
 
@@ -30,14 +31,10 @@ if(isset($_POST['id'])){
 	$id = $_POST['id'];
 	$sql = "SELECT * FROM session_info where course_id='$id' ";
 	$result = $conn->query($sql);
-	$array;
 	while($row=mysqli_fetch_array($result)){
-		$array[] = [
-		   'course_id'=>$row['course_id'],
-		   'session'=>$row['session'],
-		];
-	};
-	echo json_encode($array);
+		echo "<option value=".$row['id']." >".$row['session']."</option>";
+	}
+	exit;
 	
 }
 

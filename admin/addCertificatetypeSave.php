@@ -1,18 +1,10 @@
 <?php 
 session_start();
-include_once("dbCon.php");
+include_once("../dbCon.php");
 
 $conn =connect();
 
-$valid=true; 
-
-if($_POST['course']==null){
-	$valid=false;
-	$_SESSION['cmsg']='Certificate name field is blank';
-	
-}
-
-if(isset($_POST["certificate_submit"]) && ($valid==true)){
+if(isset($_POST["certificate_submit"])){
 	
 	function generateRandomString()  {
         $characters = '0123456789';
@@ -45,13 +37,8 @@ if(isset($_POST["certificate_submit"]) && ($valid==true)){
 	$_SESSION['cmsg']='Added succesfully';
 	header("Location:addCertificatetype.php");
 	
-}elseif($valid==false){
-	header("Location:addCertificatetype.php");
 }
-if(isset($_POST['certificate_reset'])){
-	refresh();
-	unset($_SESSION['cmsg']);
-	header("Location:addCertificatetype.php");
-}
+
+
 
 ?>

@@ -31,13 +31,16 @@
 <body class="hold-transition login-page">
 	<div class="login-box">
 	  <div class="login-logo">
-		<a ><b>Certificate</b><br>Management System</a>
+		<a >Admin of </br><b>Certificate</b><br>Management System</a>
 	  </div>
 	  <!-- /.login-logo -->
 	  <div class="login-box-body">
 		<p class="login-box-msg">Sign in to start your session</p>
-		<p class="login-box-msg" style="color:red;" ><?php if (isset($_SESSION['lmsg'])){ echo $_SESSION['lmsg'];} ?></p>
-
+		
+					<?php if (isset($_SESSION['lmsg'])){?>
+					<div class="callout callout-danger msg" ><p><?php echo $_SESSION['lmsg'];?></p></div>
+					<?php unset ($_SESSION['lmsg']); }?>
+		
 		<form action="loginSave.php" method="post">
 		  <div class="form-group has-feedback">
 			<input type="text" class="form-control" name="email" placeholder="Email">
@@ -66,6 +69,12 @@
 	<!-- /.login-box -->
 
 <!-- jQuery 3 -->
+<script>
+setTimeout(function() {
+    $('.msg').fadeOut(500);
+}, 2000); 
+
+</script>
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

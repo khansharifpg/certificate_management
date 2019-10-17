@@ -47,7 +47,9 @@ label.error {
 				<div class="box-header with-border">
 				  <h3 style="color:orange;" class="box-title">Course Name Form </h3>
 				</div> 
-				
+				<?php if (isset($_SESSION['cmsg'])){?>
+					<div class="callout callout-success msg"  ><p><?=$_SESSION['cmsg']?></p></div>
+					<?php unset ($_SESSION['cmsg']);} ?>
 					<form class="form-horizontal" onsubmit="return nullcheck();"  action="addCertificatetypeSave.php" method="POST" >
 						<div class="box-body">
 							  <div class="box-body">

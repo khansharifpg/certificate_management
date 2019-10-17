@@ -28,13 +28,17 @@ label.error {
 
 </style>
 <?php
+include_once("dbCon.php");
+$conn =connect();
+
 if(isset($_GET['id'])){
 $id=$_GET['id'];
 
-				include_once("dbCon.php");
-				$conn =connect();
-				$sql="SELECT * FROM accounts_detail WHERE id='$id'";
+				
+				$sql="SELECT * FROM accounts_detail WHERE local_id='$id'";
 				$result= $conn->query($sql);
+				//echo $sql;
+				//exit();
 	            //var_dump ($result);
 				
 				$row=mysqli_fetch_assoc($result);
@@ -57,16 +61,22 @@ $id=$_GET['id'];
 					<div class="box-header with-border">
 					  <h3 style="color:orange;" class="box-title"  >Account Information Form </h3>
 					</div> 
-				
+				<?php if (isset($_SESSION['amsg'])){?>
+					<div class="callout callout-success msg"  ><p><?=$_SESSION['amsg']?></p></div>
+					<?php unset ($_SESSION['amsg']);} ?>
+					<?php if (isset($_SESSION['emsg'])){?>
+					<div class="callout callout-danger msg" ><p><?php echo $_SESSION['emsg'];?></p></div>
+					<?php unset ($_SESSION['emsg']); }?>
 						<form class="form-horizontal" onsubmit="return nullcheck();" action="addAccountDetailSave.php" method="POST">
+						<input type="hidden" name="id" value="<?=$row['local_id'];?>">
 							<div class="box-body">
 								<div class="form-group">
 								  <label for="StudentID" class="col-sm-4 control-label">Local ID</label>
 
 								  <div class="col-sm-8">
 									<input type="text" id="local_id" class="form-control" name="studentid" oninput="ontype();" placeholder="Student Id" value= "<?php 
-									if(isset($row['StudentId'])){	
-										echo $row['StudentId'];}
+									if(isset($row['local_id'])){	
+										echo $row['local_id'];}
 									?>">
 								  </div>
 								</div>
@@ -106,9 +116,15 @@ $id=$_GET['id'];
 								</div>								
 							</div>
 							   <!-- /.box-body -->
+							
 							<div class="box-footer">
-								 <a class="btn btn-primary" href="viewAccountDetail" role="button" style="background-color:red">Back</a>
-								<button type="submit" class="btn btn-info pull-right" style="background-color:green" id="acount_submit" name="acount_submit" >Submit</button>
+								 <a class="btn btn-primary" href="viewAccountDetail.php" role="button" style="background-color:red">Back</a>
+								
+								<?php if(isset($_GET['id'])){?>
+								<button type="submit" class="btn btn-info pull-right" name="acount_edit">Edit</button> <?php } else{?>
+								<button type="submit" class="btn btn-success pull-right" id="acount_submit" name="acount_submit" >Submit</button><?php }?>
+								
+								
 							</div>
 						</form>			
 			</div> 									

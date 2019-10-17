@@ -33,14 +33,14 @@ $sql=" SELECT * FROM user where email ='$email_username' AND pass='$password'";
 							$_SESSION['fullname']=$row['fullname'];
             }
 	
-	header('Location:../index.php');
+	header('Location:dashboard');
 }else{
 	$_SESSION['lmsg']="invalid login";
-	header('Location:login.php');
+	header('Location:index');
 }
 }elseif($valid==false){
 	$_SESSION['lmsg']="invalid login";
-	header('Location:login.php');
+	header('Location:index');
 	
 }
 ?>

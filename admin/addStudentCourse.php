@@ -7,19 +7,15 @@ include_once 'includes/header.php';
 function  datacourse(){
 	//alert('ok');
 	var id = $('#courseID').val();
-	var sess = $('#session');
 	$.ajax({
 	type:'POST',
 	url:'addStudentCourseSave.php',
 	data:{id,id},
-	dataType:"json",
 	success : function(response){
 		//console.log(response);
 		for(var i=0;i<response.length ;i++){
-					$('#session').empty();
-				for(var i=0;i<response.length ;i++){
-					$('#session').append('<option value="'+response[i].id+'">'+response[i].session+'</option>');
-				}
+					
+				document.getElementById("session").innerHTML=response;
 			}
 		}
 		})
@@ -73,6 +69,12 @@ label.error {
 					<div class="box-header with-border">
 					  <h3 style="color:orange;" class="box-title">Student Certificate Info Form</h3>
 					</div>
+					<?php if (isset($_SESSION['cmsg'])){?>
+					<div class="callout callout-success msg"  ><p><?=$_SESSION['cmsg']?></p></div>
+					<?php unset ($_SESSION['cmsg']);} ?>
+					<?php if (isset($_SESSION['emsg'])){?>
+					<div class="callout callout-danger msg" ><p><?php echo $_SESSION['emsg'];?></p></div>
+					<?php unset ($_SESSION['emsg']); }?>
 					<form class="form-horizontal" onsubmit="return nullcheck();"  action="addStudentCourseSave.php" method="POST">
 							<div class="box-body">
 								<div class="form-group">

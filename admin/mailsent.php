@@ -5,11 +5,23 @@ include_once 'signinchecker.php';
 $conn = connect();
 	if (isset($_GET['id'])){
     $id = $_GET['id'];
-	$sql = "SELECT email from students_info where ncc_id='$id'";
-	echo $sql;
+    $cd = $_GET['cd'];
+    $ss = $_GET['ss'];
+	$sql = "SELECT * from students_info  where ncc_id='$id'";
+	$ssql = "SELECT * from course_info  where id='$cd'";
+	$sssql = "SELECT * from session_info  where id='$ss' AND course_id='$cd'";
   $result = $conn->query($sql);
+  $resultt = $conn->query($ssql);
+  $resulttt = $conn->query($sssql);
   foreach ($result as $row){
     $usermail = $row['email'];
+	$name = $row['full_name'];
+  }
+  foreach ($resultt as $row){
+    $course = $row['course'];
+  }
+  foreach ($resulttt as $row){
+	$session = $row['session'];
   }
 		$mailto = $usermail;
 		$mailSub 	= "Certificate Issue";
@@ -426,10 +438,10 @@ $conn = connect();
 						<!-- Body content -->
 						<tr>
 							<td class='content-cell'>
-							<h1>Hi , </h1>
-							<p>Your certificate is ready!</p>
-							<p><strong>Please check your portal.</strong></p>
-							<p>http://localhost/cm/auth/login</p>
+							<h1>Hi <b>$name</b>, </h1>
+							<p>Your <b>$course</b> certificate of <b>$session</b> session is ready!</p>
+							<p>Please check your portal.</p>
+							<p>http://localhost/cm/</p>
 							<!-- Action -->
 							<table class='body-action' align='center' width='100%' cellpadding='0' cellspacing='0'>
 								<tr>
@@ -499,15 +511,15 @@ $conn = connect();
 		$mail ->Subject = $mailSub;
 		$mail ->Body = $mailMsg;
 		$mail ->AddAddress($mailto);
-			if(!$mail->Send())
+			if($mail->Send())
 			{
-        echo '<script>alert("Mail cannot be sent..Something Went Wrong!! ")</script>';
-        echo '<script>window.location.href="addStudentCourse.php";</script>';
+        $_SESSION['cmsg']="A mail has been sent succesfully";
+		 header('Location:addStudentCourse');
 			}
 			else
 			{
-        echo '<script>alert("A confirmation mail has beem Sent!! ")</script>';
-        echo '<script>window.location.href="addStudentCourse.php";</script>';
+        $_SESSION['emsg']="Mail cannot be sent !! try again later!!";
+		 header('Location:addStudentCourse');
 			}
 		}
 

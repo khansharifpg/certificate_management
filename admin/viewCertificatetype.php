@@ -31,7 +31,6 @@ include_once 'includes/sidebar.php';
 								<tr>
 								  <th>Course Name</th> 
 								  <th>Session</th> 
-								  <th>Action</th>
 								</tr>
 							</thead>
 							<tbody>	
@@ -56,9 +55,8 @@ include_once 'includes/sidebar.php';
 								
 								echo $row['session'];echo '  &nbsp; | &nbsp;  ';
 								}
-								  
-								  ?></td>
-								  <td><a type="button" class="btn btn-primary" href="addCertificatetype.php?id=<?=$value['id']?>">Edit</td> 
+								 
+								  ?> 
 								</tr>
 								<?php
 								}
@@ -68,7 +66,6 @@ include_once 'includes/sidebar.php';
 								<tr>
 								  <th>Course Name</th>
 								  <th>Session</th>
-								  <th>Action</th>
 								</tr>
 							</tfoot>
 						</table>

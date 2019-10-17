@@ -10,7 +10,12 @@ reserved.
 
 </div>
 <!-- ./wrapper -->
+<script>
+setTimeout(function() {
+    $('.msg').fadeOut(500);
+}, 3000); 
 
+</script>
 <!-- jQuery 3 -->
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->

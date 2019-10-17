@@ -5,9 +5,9 @@ include_once 'includes/navbar.php';
 include_once 'includes/sidebar.php';
 ?>  
 
-	<section class="content-header">
-       <h1>      
-         <a class="btn btn-primary"  href="addAccountDetail" role="button" style="background-color:green"> <i class="fa fa-plus" aria-hidden="true"></i>  Add Account details </a>
+<section class="content-header">
+      <h1>      
+         <a class="btn btn-primary"  href="addStudentInfo" role="button" style="background-color:green" > <i class="fa fa-plus" aria-hidden="true"></i> Add Student Information</a>
       </h1>
 	  
       <ol class="breadcrumb">
@@ -16,25 +16,26 @@ include_once 'includes/sidebar.php';
       </ol>
     </section>
 <!-- Main content -->
-    <section class="content">
+       <section class="content">
 		<div class="row">
 			<div class="col-xs-12">
 				  
 				<div class="box">
 					<div class="box-header">
-					  <h3 class="box-title">Students Account details Data Table </h3>
+					  <h3 class="box-title">Students Data Table </h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
-						<table id="example1" class="table table-bordered table-striped">
+								<table id="example1" class="table table-bordered table-striped">
 							<thead>
 								<tr>
 								  <th>Local ID</th>
+								  <th>NCC ID</th>
 								  <th>Student Name</th>
-								  <th>Paybale Amount</th>
-								  <th>Paid Amount</th>
-								  <th>Due Amount</th>
-								  <th>Fine</th>
+								  <th>Date Of Birth</th>
+								  <th>Email</th>
+								  <th>Phone Number</th>
+								  <th>Library Clearance</th>
 								  <th>Edit</th>
 								</tr>
 							</thead>
@@ -42,7 +43,7 @@ include_once 'includes/sidebar.php';
 								<?php
 								include_once("dbCon.php");
 								$conn =connect();
-								$sql="SELECT * FROM accounts_detail as a , students_info as s where a.local_id = s.local_id";
+								$sql="SELECT * FROM students_info";
 								$result= $conn->query($sql);
 								foreach($result as $value){
 								 
@@ -51,12 +52,17 @@ include_once 'includes/sidebar.php';
 								?>
 								<tr>
 								  <td><?=$value['local_id']?></td>
+								  <td><?=$value['ncc_id']?></td>
 								  <td><?=$value['full_name']?></td>
-								  <td><?=$value['payable_amount']?></td>
-								  <td><?=$value['paid_amount']?></td>
-								  <td><?php $a = ($value ['payable_amount'] - $value['paid_amount']); echo $a;?></td>
-								  <td><?=$value['fine']?></td>
-								  <td><a type="button" class="btn btn-primary" href="addAccountDetail.php?id=<?=$value['id']?>">Edit</td>
+								  <td><?=$value['dob']?></td>
+								  <td><?=$value['email']?></td>
+								  <td><?=$value['phone']?></td>
+								  <td><?php if ($value['library_clearance']==0){
+									  echo "YES";
+								  }else{
+									  echo "No";
+								  }?></td> 
+								  <td><a type="button" class="btn btn-primary" href="addStudentInfo?id=<?=$value['local_id']?>">Edit</td>
 								</tr>
 							<?php } ?>
 								
@@ -65,11 +71,12 @@ include_once 'includes/sidebar.php';
 							<tfoot>
 								<tr>
 								  <th>Local ID</th>
+								  <th>NCC ID</th>
 								  <th>Student Name</th>
-								  <th>Paybale Amount</th>
-								  <th>Paid Amount</th>
-								  <th>Due Amount</th>
-								  <th>Fine</th>
+								  <th>Date Of Birth</th>
+								  <th>Email</th>
+								  <th>Phone Number</th>
+								  <th>Library Clearance</th>
 								  <th>Edit</th>
 								</tr>
 							</tfoot>
@@ -97,6 +104,5 @@ include_once 'includes/footer.php';
     })
   })
 </script>
-
 </body>
 </html>

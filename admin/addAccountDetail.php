@@ -118,13 +118,11 @@ $id=$_GET['id'];
 							   <!-- /.box-body -->
 							
 							<div class="box-footer">
-								 <a class="btn btn-primary" href="viewAccountDetail.php" role="button" style="background-color:red">Back</a>
+								 <a class="btn btn-primary" href="viewAccountDetail" role="button" style="background-color:red">Back</a>
 								
 								<?php if(isset($_GET['id'])){?>
 								<button type="submit" class="btn btn-info pull-right" name="acount_edit">Edit</button> <?php } else{?>
 								<button type="submit" class="btn btn-success pull-right" id="acount_submit" name="acount_submit" >Submit</button><?php }?>
-								
-								
 							</div>
 						</form>			
 			</div> 									

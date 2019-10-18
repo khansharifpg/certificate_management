@@ -43,13 +43,13 @@ $id=$_GET['id'];
 
 
     <section class="content-header">
-      <h1>
-        
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-      </ol>
+		  <h1>
+			
+		  </h1>
+		  <ol class="breadcrumb">
+			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+			<li class="active">Dashboard</li>
+		  </ol>
     </section>
 	<section>
 		<div class="col-md-6 col-sm-offset-3">		
@@ -81,7 +81,7 @@ $id=$_GET['id'];
 								  <label for="Ncc ID" class="col-sm-4 control-label">NCC ID</label>
 
 								  <div class="col-sm-8">
-									<input type="text" class="form-control" id="ncc_id" oninput="ontype();"  name="nccid" placeholder="NCC Id" value="<?php 
+									<input type="text" class="form-control" id="ncc_iid" oninput="ontype();"  name="nccid" placeholder="NCC Id" value="<?php 
 									if(isset($row['ncc_id'])){	
 										echo $row['ncc_id'];}
 									?>">
@@ -143,9 +143,13 @@ $id=$_GET['id'];
 								
 							</div>
 							  <!-- /.box-body -->
+							
 							<div class="box-footer">
-								 <a class="btn btn-primary" href="viewStudentInfo.php" role="button" style="background-color:red">Back</a>
-								<button type="submit" class="btn btn-info pull-right" style="background-color:green" name="student_submit" id="student_submit">Submit</button> 
+								 <a class="btn btn-primary" href="viewStudentInfo" role="button" style="background-color:red">Back</a>
+								
+								<?php if(isset($_GET['id'])){?>
+								<button type="submit" class="btn btn-info pull-right" name="student_edit">Edit</button> <?php } else{?>
+								<button type="submit" class="btn btn-info pull-right" style="background-color:green" name="student_submit" id="student_submit">Submit</button> <?php }?>
 							</div>
 					</form>	
 					
@@ -163,8 +167,8 @@ $id=$_GET['id'];
 			return false;
 		}
 		
-		if($('#ncc_id').val()==''){
-			$('#ncc_id').after('<span class="error">* This field is required</span>');
+		if($('#ncc_iid').val()==''){
+			$('#ncc_iid').after('<span class="error">* This field is required</span>');
 			return false;
 		}
 		
@@ -199,40 +203,41 @@ $id=$_GET['id'];
 	 if (isNaN( $("#local_iid").val() )) {
 		 
 		$('#local_iid').after('<span class="error">* Local Id is numeric!!</span>');
-		//return false;
 		$('#student_submit').attr('disabled',true);
 		
-	}else if($("#local_iid").val() < 0){
+	}else if($("#local_iid").val() <= 0){
 		
 		$('#local_iid').after('<span class="error">* 0 or minus value not accepted!!</span>');
 		$('#student_submit').attr('disabled',true);
 		
-	}else if(isNaN($("#ncc_id").val() )){
+	}else if(isNaN($("#ncc_iid").val() )){
 		
-		$('#ncc_id').after('<span class="error">* Ncc Id is numeric!!</span>');
+		$('#ncc_iid').after('<span class="error">* Ncc Id is numeric!!</span>');
 		$('#student_submit').attr('disabled',true);
 		
-	}else if($("#ncc_id").val() < 0){
+	}else if($("#ncc_iid").val() <= 0){
 		
-		$('#ncc_id').after('<span class="error">* 0 or minus value not accepted!!</span>');
+		$('#ncc_iid').after('<span class="error">* 0 or minus value not accepted!!</span>');
+		$('#student_submit').attr('disabled',true);
+		
+	}else if(!/^[a-z ]+$/i.test($("#Student_name").val())){
+		
+		$('#Student_name').after('<span class="error">* Name can not be numeric!!</span>');
 		$('#student_submit').attr('disabled',true);	
+	
+	
+	}else if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($("#email").val())){
 		
-	}else if(!/^[a-z ]+$/i.test($("#Student_name").val() )){
-		
-		$('#Student_name').after('<span class="error">* Name can not be is numeric!!</span>');
-		$('#student_submit').attr('disabled',true);
-		
+		$('#email').after('<span class="error">* Type a valid email!!</span>');
+		$('#student_submit').attr('disabled',true);	
+			
 	}else if(isNaN($("#Phone_number").val() )){
 		$('#Phone_number').after('<span class="error">* Phone Number is numeric!!</span>');
 		$('#student_submit').attr('disabled',true);
 		
-	}else if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test($("#email").val() )){
-		$('#email').after('<span class="error">* Email is invalid!!</span>');
-		$('#student_submit').attr('disabled',true);
-			
-	}else if($("#Phone_number").val() <= 0){
+	}else if(! /^[0-9]{11}$/.test($("#Phone_number").val())){
 	
-		$('#Phone_number').after('<span class="error">* 0 or minus value not accepted!!</span>');
+		$('#Phone_number').after('<span class="error">* Input exactly 11 numbers!!</span>');
 		$('#student_submit').attr('disabled',true);
 	
    }
@@ -240,7 +245,7 @@ $id=$_GET['id'];
 	
 	
  }
-</script>	 	
+</script> 	
 <?php
 include_once 'includes/footer.php';
 ?>

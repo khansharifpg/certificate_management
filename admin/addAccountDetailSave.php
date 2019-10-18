@@ -34,10 +34,10 @@ if(isset($_POST["acount_edit"])){
 	
 	$payable_amount = $_POST['payableamount'];
 	$paid_amount = $_POST['paidamount'];
-	
+	$due_a = $payable_amount-$paid_amount;
 	$fine_a = $_POST['fine'];
 	
-	$sql="UPDATE accounts_detail SET local_id='$id', payable_amount='$payable_amount', paid_amount='$paid_amount', fine='$fine_a' WHERE local_id='$id'";
+	$sql="UPDATE accounts_detail SET local_id='$id', payable_amount='$payable_amount', paid_amount='$paid_amount', due='$due_a' ,fine='$fine_a' WHERE local_id='$id'";
 	
 	if($conn->query($sql)){
 

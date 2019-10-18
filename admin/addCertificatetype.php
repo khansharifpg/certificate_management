@@ -109,13 +109,7 @@ label.error {
 		function ontype(){
 		$(".error").remove();
 		
-		$('#certifi_submit').removeAttr('disabled',true);
 		
-		 if(!/^[a-z ]+$/i.test($("#certificate").val() )){
-			$('#certificate').after('<span class="error">* Course name can not be is numeric!!</span>');
-			$('#certifi_submit').attr('disabled',true);
-		}
-	
  }
 </script> 
  

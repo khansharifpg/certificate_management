@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2019 at 01:24 PM
+-- Generation Time: Oct 23, 2019 at 03:14 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -41,10 +41,8 @@ CREATE TABLE `accounts_detail` (
 --
 
 INSERT INTO `accounts_detail` (`local_id`, `payable_amount`, `paid_amount`, `due`, `fine`) VALUES
-(-1, 3000, 2222, 778, 0),
-(33, 3000, 33, 2967, 44),
-(111, 1000, 500, 500, 0),
-(1000876, 1000, 500, 0, 0);
+(100876, 3000, 3000, 0, 0),
+(1000876, 3000, 2000, 1000, 0);
 
 -- --------------------------------------------------------
 
@@ -62,8 +60,7 @@ CREATE TABLE `course_info` (
 --
 
 INSERT INTO `course_info` (`id`, `course`) VALUES
-(150315, 'IFY'),
-(793607, 'l4dc');
+(921217, 'IFY');
 
 -- --------------------------------------------------------
 
@@ -82,11 +79,8 @@ CREATE TABLE `session_info` (
 --
 
 INSERT INTO `session_info` (`id`, `course_id`, `session`) VALUES
-(1, 150315, 'December'),
-(2, 793607, 'March'),
-(3, 793607, 'June'),
-(4, 793607, 'September'),
-(5, 793607, 'December');
+(40, 921217, 'March'),
+(41, 921217, 'June');
 
 -- --------------------------------------------------------
 
@@ -101,15 +95,16 @@ CREATE TABLE `students_info` (
   `dob` date NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone` varchar(16) NOT NULL,
-  `library_clearance` tinyint(1) NOT NULL COMMENT '0=clear(yes)'
+  `password` varchar(50) NOT NULL DEFAULT '12345',
+  `library_clearance` int(1) NOT NULL COMMENT '0=clear(yes)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `students_info`
 --
 
-INSERT INTO `students_info` (`local_id`, `ncc_id`, `full_name`, `dob`, `email`, `phone`, `library_clearance`) VALUES
-('1000876', '00171363', 'Sharif Ahamed Khan', '1998-09-20', '1000876@daffodil.ac', '01836691343', 0);
+INSERT INTO `students_info` (`local_id`, `ncc_id`, `full_name`, `dob`, `email`, `phone`, `password`, `library_clearance`) VALUES
+('100876', '00171363', 'Sharif', '2019-10-15', '1000876@daffodil.ac', '01836691343', '12345', 0);
 
 -- --------------------------------------------------------
 
@@ -130,7 +125,7 @@ CREATE TABLE `student_course` (
 --
 
 INSERT INTO `student_course` (`id`, `ncc_id`, `session`, `course_id`, `delivery_date`) VALUES
-(1, '00171363', '1', '150315', '06-10-2019');
+(11, '00171363', '40', '921217', '');
 
 -- --------------------------------------------------------
 
@@ -150,7 +145,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `fullname`, `email`, `pass`) VALUES
-(1, 'Bablu Molla', 'x@g.com', '12345');
+(1, 'Admin', 'admin@g.com', '12345');
 
 --
 -- Indexes for dumped tables
@@ -203,13 +198,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `session_info`
 --
 ALTER TABLE `session_info`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `student_course`
 --
 ALTER TABLE `student_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user`

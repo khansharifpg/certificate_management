@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
+<?php $activePage = basename($_SERVER['PHP_SELF'], ".php"); ?>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>DIA Certificate Management</title>
+  <title>  <?php echo $title; ?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  
+  <link rel="icon" href="a.jpg" type="image/x-icon" />
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->

@@ -7,23 +7,22 @@ $conn = connect();
 
 if(isset($_POST['acount_submit'])){
 	
-	$student_id = $_POST['studentid'];
+	$local_id = $_POST['local_id'];
 	$payable_amount = $_POST['payableamount'];
 	$paid_amount = $_POST['paidamount'];
 	$due_a = $payable_amount-$paid_amount;
 	$fine_a = $_POST['fine'];
 	
-	$sql="INSERT INTO accounts_detail(local_id, payable_amount, paid_amount, due, fine ) VALUES('$student_id', '$payable_amount', '$paid_amount', '$due_a', '$fine_a')";
+	$sql="INSERT INTO accounts_detail(local_id, payable_amount, paid_amount, due, fine ) VALUES('$local_id', '$payable_amount', '$paid_amount', '$due_a', '$fine_a')";
 	
-	//echo $sql;
 	if($conn->query($sql)){
 
 	$_SESSION['amsg']='Added successfully';
-	header('Location:addAccountDetail');
+	header('Location:viewStudentInfo');
 	}
 	else{
 	$_SESSION['emsg']="Something Went wrong!! Try Again later";
-	header('Location:addAccountDetail');
+	header('Location:viewStudentInfo');
 	}
 }
 

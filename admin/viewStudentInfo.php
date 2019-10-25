@@ -1,4 +1,5 @@
 <?php
+$title = 'View Student Info | DIA';
 include_once 'signinchecker.php';
 include_once 'includes/header.php';
 include_once 'includes/navbar.php';
@@ -26,6 +27,15 @@ include_once 'includes/sidebar.php';
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
+					<?php if (isset($_SESSION['cmsg'])){?>
+					<div class="callout callout-success msg"  ><p><?=$_SESSION['cmsg']?></p></div>
+					<?php unset ($_SESSION['cmsg']);} ?>
+					<?php if (isset($_SESSION['amsg'])){?>
+					<div class="callout callout-success msg"  ><p><?=$_SESSION['amsg']?></p></div>
+					<?php unset ($_SESSION['amsg']);} ?>
+					<?php if (isset($_SESSION['emsg'])){?>
+					<div class="callout callout-danger msg" ><p><?php echo $_SESSION['emsg'];?></p></div>
+					<?php unset ($_SESSION['emsg']); }?>
 								<table id="example1" class="table table-bordered table-striped">
 							<thead>
 								<tr>
@@ -36,6 +46,8 @@ include_once 'includes/sidebar.php';
 								  <th>Email</th>
 								  <th>Phone Number</th>
 								  <th>Library Clearance</th>
+								  <th>Add Account</th>
+								  <th>Add Certificate</th>
 								  <th>Edit</th>
 								</tr>
 							</thead>
@@ -43,7 +55,7 @@ include_once 'includes/sidebar.php';
 								<?php
 								include_once("dbCon.php");
 								$conn =connect();
-								$sql="SELECT * FROM students_info";
+								$sql="SELECT s.*,a.local_id as lid FROM students_info as s LEFT JOIN accounts_detail as a ON s.local_id = a.local_id ";
 								$result= $conn->query($sql);
 								foreach($result as $value){
 								 
@@ -62,6 +74,31 @@ include_once 'includes/sidebar.php';
 								  }else{
 									  echo "No";
 								  }?></td> 
+								  
+								  <td>
+								  <?php
+									if($value['lid']==null){
+								  ?>
+									<a type="button" class="btn btn-info" href="addAccountDetail?add_id=<?=$value['local_id']?>">Add Acc
+								  <?php
+										}else{
+										echo 'Already Added';
+									}
+								  ?>
+								  </td>
+								  <td>
+								   <?php
+									if($value['lid']!==null){
+								  ?>
+									
+								  <a type="button" class="btn btn-warning" href="addStudentCourse?ncc_id=<?=$value['ncc_id']?>&&name=<?=$value['full_name']?>">Add Certificate</td>
+								  <?php
+										}else{
+										echo 'Account not added';
+									}
+								  ?>
+								  </td>
+								  
 								  <td><a type="button" class="btn btn-primary" href="addStudentInfo?id=<?=$value['local_id']?>">Edit</td>
 								</tr>
 							<?php } ?>
@@ -77,6 +114,8 @@ include_once 'includes/sidebar.php';
 								  <th>Email</th>
 								  <th>Phone Number</th>
 								  <th>Library Clearance</th>
+								  <th>Add Account</th>
+								  <th>Add Certificate</th>
 								  <th>Edit</th>
 								</tr>
 							</tfoot>

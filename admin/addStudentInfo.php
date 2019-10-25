@@ -1,4 +1,5 @@
 <?php
+$title = 'Add Student Info | DIA';
 include_once 'signinchecker.php';
 include_once 'includes/header.php';
 include_once 'includes/navbar.php';

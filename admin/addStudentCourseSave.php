@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 include_once("dbCon.php");
 
 $conn =connect();
@@ -16,13 +16,14 @@ if(isset($_POST["student_submit"])){
 	$sql="INSERT INTO student_course(ncc_id, session, course_id) 
 		  VALUES('$id', '$session', '$course_Name')";
 		
-	//echo $sql;
+	
 	if($conn->query($sql)){
-		header("Location:mailsent.php?id=$id&&cd=$course_Name&&ss=$session");
+		$_SESSION['cmsg']=" Certificate Added Successfully";
+	 header('Location:viewStudentInfo');
 	}
 	else {
 	 $_SESSION['emsg']="Something Went wrong!! Try Again later";
-	 header('Location:addStudentCourse');
+	 header('Location:viewStudentInfo');
 	}
 }
 

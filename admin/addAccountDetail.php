@@ -1,4 +1,5 @@
 <?php
+$title = 'Add Account | DIA';
 include_once 'signinchecker.php';
 include_once 'includes/header.php';
 include_once 'includes/navbar.php';
@@ -61,23 +62,23 @@ $id=$_GET['id'];
 					<div class="box-header with-border">
 					  <h3 style="color:orange;" class="box-title"  >Account Information Form </h3>
 					</div> 
-				<?php if (isset($_SESSION['amsg'])){?>
-					<div class="callout callout-success msg"  ><p><?=$_SESSION['amsg']?></p></div>
-					<?php unset ($_SESSION['amsg']);} ?>
-					<?php if (isset($_SESSION['emsg'])){?>
-					<div class="callout callout-danger msg" ><p><?php echo $_SESSION['emsg'];?></p></div>
-					<?php unset ($_SESSION['emsg']); }?>
+				
 						<form class="form-horizontal" onsubmit="return nullcheck();" action="addAccountDetailSave.php" method="POST">
 						<input type="hidden" name="id" value="<?=$row['local_id'];?>">
+						<input type="hidden" name="local_id" value="<?=$_GET['add_id'];?>">
 							<div class="box-body">
 								<div class="form-group">
-								  <label for="StudentID" class="col-sm-4 control-label">Local ID</label>
+								  <label for="StudentID" class="col-sm-4 control-label">Local ID :</label>
 
-								  <div class="col-sm-8">
-									<input type="text" id="local_id" class="form-control" name="studentid" oninput="ontype();" placeholder="Student Id" value= "<?php 
+								  <div class="col-sm-4">
+									
+								  <label for="StudentID" class="col-sm-4 control-label"><?php 
+								  
 									if(isset($row['local_id'])){	
 										echo $row['local_id'];}
-									?>">
+									if(isset($_GET['add_id'])){	
+										echo $_GET['add_id'];}
+									?></label>
 								  </div>
 								</div>
 								
@@ -118,7 +119,11 @@ $id=$_GET['id'];
 							   <!-- /.box-body -->
 							
 							<div class="box-footer">
-								 <a class="btn btn-primary" href="viewAccountDetail" role="button" style="background-color:red">Back</a>
+								<?php if(isset($_GET['add_id'])){?>
+								 <a class="btn btn-danger" href="viewStudentInfo" role="button">Back</a>
+								<?php }else{ ?>
+								 <a class="btn btn-danger" href="viewAccountDetail" role="button">Back</a>
+								<?php } ?>
 								
 								<?php if(isset($_GET['id'])){?>
 								<button type="submit" class="btn btn-info pull-right" name="acount_edit">Edit</button> <?php } else{?>
@@ -133,11 +138,6 @@ $id=$_GET['id'];
 	function nullcheck(){
 			
 		$(".error").remove(); 
-		
-		if($('#local_id').val()==''){
-			$('#local_id').after('<span class="error">* This field is required</span>');
-			return false;
-		}
 		
 		if($('#pay_amount').val()==''){
 			$('#pay_amount').after('<span class="error">* This field is required</span>');
@@ -157,17 +157,7 @@ $id=$_GET['id'];
 	
 	$('#acount_submit').removeAttr('disabled',true);
 	
-	 if (isNaN( $("#local_id").val() )) {
-		 
-		$('#local_id').after('<span class="error">* Local Id is numeric!!</span>');
-		$('#acount_submit').attr('disabled',true);
-		
-	}else if($("#local_id").val() <= 0){
-		
-		$('#local_id').after('<span class="error">* 0 or minus value not accepted!!</span>');
-		$('#acount_submit').attr('disabled',true);
-		
-	}else if(isNaN($("#pay_amount").val() )){
+	 if(isNaN($("#pay_amount").val() )){
 		
 		$('#pay_amount').after('<span class="error">* Payable amount is numeric!!</span>');
 		$('#acount_submit').attr('disabled',true);

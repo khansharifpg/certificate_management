@@ -3,26 +3,23 @@ include_once 'dbCon.php';
 include_once 'signinchecker.php';
 
 $conn = connect();
-	if (isset($_GET['id'])){
-    $id = $_GET['id'];
-    $cd = $_GET['cd'];
-    $ss = $_GET['ss'];
-	$sql = "SELECT * from students_info  where ncc_id='$id'";
-	$ssql = "SELECT * from course_info  where id='$cd'";
-	$sssql = "SELECT * from session_info  where id='$ss' AND course_id='$cd'";
-  $result = $conn->query($sql);
-  $resultt = $conn->query($ssql);
-  $resulttt = $conn->query($sssql);
-  foreach ($result as $row){
+					
+	if (isset($_GET['course'])){
+    $c = $_GET['course'];
+    $s= $_GET['session'];
+	
+	$sql = "SELECT *,s.ncc_id as ncc FROM students_info as s,student_course as sc ,accounts_detail as a ,session_info as si, course_info as c
+			where s.ncc_id=sc.ncc_id AND sc.session=si.id AND s.local_id = a.local_id and  c.id = sc.course_id AND c.id = '$c' AND si.id = '$s' AND sc.mail_sent = 0";
+	$result= $conn->query($sql);
+	//var_dump($result);exit;
+	foreach ($result as $row){
+	
     $usermail = $row['email'];
 	$name = $row['full_name'];
-  }
-  foreach ($resultt as $row){
-    $course = $row['course'];
-  }
-  foreach ($resulttt as $row){
+	$course = $row['course'];
 	$session = $row['session'];
-  }
+	$ncc = $row['ncc'];
+  
 		$mailto = $usermail;
 		$mailSub 	= "Certificate Issue";
 		$message	="
@@ -487,7 +484,7 @@ $conn = connect();
 			</body>
 		</html>";
 		$mailMsg 	= $message;
-		require 'PHPMailer-master/PHPMailerAutoload.php';
+		require_once 'PHPMailer-master/PHPMailerAutoload.php';
 		$mail 		= new PHPMailer();
 		$mail->SMTPOptions = array(
 		'ssl' => array(
@@ -511,17 +508,16 @@ $conn = connect();
 		$mail ->Subject = $mailSub;
 		$mail ->Body = $mailMsg;
 		$mail ->AddAddress($mailto);
-			if($mail->Send())
-			{
-        $_SESSION['cmsg']="A mail has been sent succesfully";
-		 header('Location:addStudentCourse');
-			}
-			else
-			{
-        $_SESSION['emsg']="Mail cannot be sent !! try again later!!";
-		 header('Location:addStudentCourse');
-			}
+		$mail->Send();
+		
+		$sql= "UPDATE student_course SET mail_sent= 1
+			WHERE ncc_id='$ncc' AND session=$s AND course_id = $c";
+		$conn->query($sql);
+			
 		}
+		$_SESSION['msg']=" Mail has been sent succesfully";
+		 header("Location:viewStudentCourse?course=$c&session=$s");
+	}
 
 
 ?>

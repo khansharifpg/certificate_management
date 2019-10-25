@@ -1,4 +1,5 @@
 <?php
+$title = 'View Student Certificate | DIA';
 include_once 'signinchecker.php';
 include_once 'includes/header.php';
 ?>
@@ -39,9 +40,7 @@ if(isset($_POST['delivery'])){
 ?>
 
 	<section class="content-header">
-       <h1>
-         <a class="btn btn-primary"  href="addStudentCourse" role="button" style="background-color:green"> <i class="fa fa-plus" aria-hidden="true"></i> Add Student Certificate Info </a>
-      </h1>
+       <h1>Search </h1>
 
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -106,11 +105,27 @@ if(isset($_POST['delivery'])){
 
 				<div class="box">
 					<div class="box-header">
+					<div class="row">
+						<div class="col-md-6">
 					  <h3 class="box-title">Students Account details Data Table </h3>
-
+						</div>
+						<div class="col-md-6">
+						<?php 
+						include_once("dbCon.php");
+						$conn =connect();
+						$id = $_GET['course'];
+						$session = $_GET['session'];	
+						?>
+					  <a class="btn btn-warning col-md-4 " href="mailsent?course=<?=$id?>&&session=<?=$session?>">Send Mail to All</a>
+				
+						</div>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
+					<?php if (isset($_SESSION['msg'])){?>
+					<div class="callout callout-success msg"  ><p><?=$_SESSION['msg']?></p></div>
+					<?php unset ($_SESSION['msg']);} ?>
+					
 						<table id="example1" class="table table-bordered table-striped">
 							<thead>
 								<tr>
@@ -120,8 +135,7 @@ if(isset($_POST['delivery'])){
 								   <th>Account Clearence</th>
 								  <th>Library Clearence</th>
 								  <th>Delivery Status </th>
-								  <th>Remarks</th>
-								  <th>Edit</th>
+								  <th>Mail Status</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -131,7 +145,7 @@ if(isset($_POST['delivery'])){
 								$id = $_GET['course'];
 								$session = $_GET['session'];
 								$sql="SELECT *,si.id as sid FROM students_info as s,student_course as sc ,accounts_detail as a ,session_info as si, course_info as c
-								where s.ncc_id=sc.ncc_id AND sc.session=si.id AND s.local_id = a.local_id and  c.id = sc.course_id AND c.id = '$id' AND si.id = '$session'";
+								where s.ncc_id=sc.ncc_id AND sc.session=si.id AND s.local_id = a.local_id and  c.id = sc.course_id AND c.id = $id AND si.id = $session";
 								//echo $sql; exit;
 								$result= $conn->query($sql);
 								foreach($result as $value){
@@ -167,14 +181,15 @@ if(isset($_POST['delivery'])){
 										<button class="btn btn-primary" name="delivery" >Deliver</button>
 									   </form>
 									  <?php }}?>
+								  </td>	
+								  <td>
+								  <?php if($value['mail_sent']==1){?>
+								  <label style="color:blue;" >Sent!</label>
+								  <?php }else{?>
+								  <label style="color:red;" >Not Sent!</label>
+								  <?php } ?>
 								  </td>
-
-
-								  <td><form method="POST">
-										<button class="btn btn-danger" name="remarks" >Remarks</button>
-									</form></td>
-								   <td><a type="button" class="btn btn-primary" href="addsStudentCertificateInfo.php?id=<?=$value['id']?>">Edit</td>
-								</tr>
+								 </tr>
 								<?php } ?>
 							</tbody>
 							<tfoot>
@@ -185,8 +200,7 @@ if(isset($_POST['delivery'])){
 								   <th>Account Clearence</th>
 								  <th>Library Clearence</th>
 								  <th>Delivery Status</th>
-								  <th>Remarks</th>
-								  <th>Edit</th>
+								  <th>Mail Status</th>
 								</tr>
 							</tfoot>
 						</table>

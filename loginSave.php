@@ -17,8 +17,8 @@ if($_POST['password']==null){
 }
 
 if(isset($_POST["login"])&& $valid==true){
-$email_username=$_POST['email'];
-$password=$_POST['password'];
+$email_username= mysqli_real_escape_string($conn,$_POST['email']);
+$password= mysqli_real_escape_string($conn,$_POST['password']);
 
 $sql=" SELECT * FROM students_info where email ='$email_username' AND password='$password'";
 			

@@ -17,11 +17,11 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-			<li><a href="index"><i class="fa fa-th"></i> <span>Dashboard</span></a></li>			
-			<li><a href="viewStudentInfo"><i class="fa fa-circle-o text-yellow"></i> <span>All Students Information</span></a></li>
-			<li><a href="viewCertificatetype"><i class="fa fa-circle-o text-aqua"></i> <span>All Course Name</span></a></li>
-			<li><a href="viewAccountDetail"><i class="fa fa-circle-o text-yellow"></i> <span>All Account Details</span></a></li>
-			<li><a href="viewStudentCourse"><i class="fa fa-circle-o text-red"></i> <span>All Students Certificate Info</span></a></li>
+			<li class="<?= ($activePage == 'dashboard') ? 'active':''; ?>" ><a href="dashboard"><i class="fa fa-th"></i> <span>Dashboard</span></a></li>			
+			<li class="<?= ($activePage == 'viewStudentInfo') ? 'active':''; ?>" ><a href="viewStudentInfo"><i class="fa fa-circle-o text-yellow"></i> <span>All Students Information</span></a></li>
+			<li class="<?= ($activePage == 'viewCertificatetype') ? 'active':''; ?>" ><a href="viewCertificatetype"><i class="fa fa-circle-o text-aqua"></i> <span>All Course Name</span></a></li>
+			<li class="<?= ($activePage == 'viewAccountDetail') ? 'active':''; ?>"><a href="viewAccountDetail"><i class="fa fa-circle-o text-yellow"></i> <span>All Account Details</span></a></li>
+			<li class="<?= ($activePage == 'viewStudentCourse') ? 'active':''; ?>"><a href="viewStudentCourse"><i class="fa fa-circle-o text-red"></i> <span>All Students Certificate Info</span></a></li>
         
        <!-- <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li> -->
 		

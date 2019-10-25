@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2019 at 03:14 PM
+-- Generation Time: Oct 25, 2019 at 05:35 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -36,14 +36,6 @@ CREATE TABLE `accounts_detail` (
   `fine` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `accounts_detail`
---
-
-INSERT INTO `accounts_detail` (`local_id`, `payable_amount`, `paid_amount`, `due`, `fine`) VALUES
-(100876, 3000, 3000, 0, 0),
-(1000876, 3000, 2000, 1000, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -54,13 +46,6 @@ CREATE TABLE `course_info` (
   `id` int(11) NOT NULL,
   `course` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `course_info`
---
-
-INSERT INTO `course_info` (`id`, `course`) VALUES
-(921217, 'IFY');
 
 -- --------------------------------------------------------
 
@@ -73,14 +58,6 @@ CREATE TABLE `session_info` (
   `course_id` int(50) NOT NULL,
   `session` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `session_info`
---
-
-INSERT INTO `session_info` (`id`, `course_id`, `session`) VALUES
-(40, 921217, 'March'),
-(41, 921217, 'June');
 
 -- --------------------------------------------------------
 
@@ -99,13 +76,6 @@ CREATE TABLE `students_info` (
   `library_clearance` int(1) NOT NULL COMMENT '0=clear(yes)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `students_info`
---
-
-INSERT INTO `students_info` (`local_id`, `ncc_id`, `full_name`, `dob`, `email`, `phone`, `password`, `library_clearance`) VALUES
-('100876', '00171363', 'Sharif', '2019-10-15', '1000876@daffodil.ac', '01836691343', '12345', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -117,15 +87,9 @@ CREATE TABLE `student_course` (
   `ncc_id` varchar(11) NOT NULL,
   `session` varchar(200) NOT NULL,
   `course_id` varchar(200) NOT NULL,
-  `delivery_date` varchar(50) NOT NULL
+  `delivery_date` varchar(50) NOT NULL,
+  `mail_sent` int(2) NOT NULL DEFAULT 0 COMMENT '0==not sent;1==sent!!'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `student_course`
---
-
-INSERT INTO `student_course` (`id`, `ncc_id`, `session`, `course_id`, `delivery_date`) VALUES
-(11, '00171363', '40', '921217', '');
 
 -- --------------------------------------------------------
 
@@ -145,7 +109,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `fullname`, `email`, `pass`) VALUES
-(1, 'Admin', 'admin@g.com', '12345');
+(1, 'Admin', 'admin@gmail.com', '12345');
 
 --
 -- Indexes for dumped tables
@@ -204,7 +168,7 @@ ALTER TABLE `session_info`
 -- AUTO_INCREMENT for table `student_course`
 --
 ALTER TABLE `student_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`

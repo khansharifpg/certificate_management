@@ -1,4 +1,5 @@
 <?php
+$title = 'View Account | DIA';
 include_once 'signinchecker.php';
 include_once 'includes/header.php';
 include_once 'includes/navbar.php';
@@ -6,9 +7,7 @@ include_once 'includes/sidebar.php';
 ?>  
 
 	<section class="content-header">
-       <h1>      
-         <a class="btn btn-primary"  href="addAccountDetail" role="button" style="background-color:green"> <i class="fa fa-plus" aria-hidden="true"></i>  Add Account details </a>
-      </h1>
+       <h1>  Account Detail </h1>
 	  
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>

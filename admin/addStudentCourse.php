@@ -1,5 +1,8 @@
 <?php
 include_once 'signinchecker.php';
+if((!isset($_GET['ncc_id']))&&(!isset($_GET['name']))){
+	header('Location:viewStudentInfo');
+}
 include_once 'includes/header.php';
 ?>
 <script>
@@ -25,7 +28,8 @@ function  datacourse(){
 
 <?php
 include_once 'includes/navbar.php';
-include_once 'includes/sidebar.php'
+include_once 'includes/sidebar.php';
+
 ?>
 
 <!-- INLINE CSS -->
@@ -69,20 +73,23 @@ label.error {
 					<div class="box-header with-border">
 					  <h3 style="color:orange;" class="box-title">Student Certificate Info Form</h3>
 					</div>
-					<?php if (isset($_SESSION['cmsg'])){?>
-					<div class="callout callout-success msg"  ><p><?=$_SESSION['cmsg']?></p></div>
-					<?php unset ($_SESSION['cmsg']);} ?>
-					<?php if (isset($_SESSION['emsg'])){?>
-					<div class="callout callout-danger msg" ><p><?php echo $_SESSION['emsg'];?></p></div>
-					<?php unset ($_SESSION['emsg']); }?>
+					
 					<form class="form-horizontal" onsubmit="return nullcheck();"  action="addStudentCourseSave.php" method="POST">
+						<input type="hidden" name='ncc_id' value='<?=$_GET['ncc_id']?>'	>
 							<div class="box-body">
 								<div class="form-group">
-								  <label for="Local ID" class="col-sm-4 control-label">Ncc ID</label>
+								  <label for="Local ID" class="col-sm-4 control-label">Student Name :</label>
+
+								  <div class="col-sm-6">
+									<label class=" control-label" ><?=$_GET['name']?></label>
+									</div>
+								</div>
+								<div class="form-group">
+								  <label for="Local ID" class="col-sm-4 control-label">Ncc ID :</label>
 
 								  <div class="col-sm-8">
-									<input type="text" class="form-control" id="nccid" oninput="ontype();" name="ncc_id" placeholder="Ncc Id">
-								  </div>
+									<label class="control-label" ><?=$_GET['ncc_id']?></label>
+									</div>
 								</div>
 								
 								<div class="form-group">
@@ -120,8 +127,8 @@ label.error {
 							</div>
 							  <!-- /.box-body -->
 							<div class="box-footer">
-								 <a class="btn btn-primary" href="viewStudentCourse" role="button" style="background-color:red">Back</a>
-								<button type="submit" class="btn btn-info pull-right" style="background-color:green" name="student_submit" id="couserSubmit">Save & Send Mail</button>
+								 <a class="btn btn-danger" href="viewStudentInfo" role="button" >Back</a>
+								<button type="submit" class="btn btn-success pull-right"  name="student_submit" id="couserSubmit">Save</button>
 							</div>
 					</form>				
 			</div> 									
@@ -133,10 +140,6 @@ label.error {
 			
 		$(".error").remove(); 
 		
-		if($('#nccid').val()==''){
-			$('#nccid').after('<span class="error">* This field is required</span>');
-			return false;
-		}
 		
 		
 		if($('#courseID').val()==''){
@@ -148,21 +151,7 @@ label.error {
 
 	}
 
-	function ontype(){
-    $(".error").remove();
-	
-	$('#couserSubmit').removeAttr('disabled',true);
-	
-	 if(isNaN($("#nccid").val() )){
-		$('#nccid').after('<span class="error">* NCC Id is numeric!!</span>');
-		$('#couserSubmit').attr('disabled',true);
-	}else if($("#nccid").val() <= 0){
-		
-		$('#nccid').after('<span class="error">* 0 or minus value not accepted!!</span>');
-		$('#couserSubmit').attr('disabled',true);
-	}
-	
- }
+
 </script>       
 <?php
 
